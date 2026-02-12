@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Perform Find by Natural Language">
+    <Option state="False"/>
+    <SelectAll state="True"/>
+    <LLMCreateFind>
+      <Action>Query</Action>
+    </LLMCreateFind>
+  </Step>
+</fmxmlsnippet>

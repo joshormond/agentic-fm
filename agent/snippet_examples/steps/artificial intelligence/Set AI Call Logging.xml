@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Set AI Call Logging">
+    <Set state="False"/>
+    <LLMDebugLog/>
+  </Step>
+</fmxmlsnippet>

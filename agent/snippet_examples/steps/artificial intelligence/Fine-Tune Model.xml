@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Fine-Tune Model">
+    <Option state="False"/>
+    <UniversalPathList type="Embedded"/>
+    <Table id="0" name=""/>
+    <FineTuneLLM>
+      <DataSource>DataTable</DataSource>
+    </FineTuneLLM>
+  </Step>
+</fmxmlsnippet>

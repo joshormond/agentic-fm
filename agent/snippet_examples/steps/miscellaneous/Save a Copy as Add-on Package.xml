@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Save a Copy as Add-on Package">
+    <LinkAvail state="False"/>
+  </Step>
+</fmxmlsnippet>

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Go to List of Records">
+    <ShowInNewWindow state="False"/>
+    <LayoutDestination value="CurrentLayout"/>
+    <NewWndStyles Style="Document" Close="Yes" Minimize="Yes" Maximize="Yes" Resize="Yes" Styles="3606018"/>
+  </Step>
+</fmxmlsnippet>

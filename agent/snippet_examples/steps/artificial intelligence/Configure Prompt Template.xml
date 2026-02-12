@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Configure Prompt Template">
+    <Option state="False"/>
+    <ConfigurePromptTemplate>
+      <ModelProvider>ChatGPT</ModelProvider>
+      <RequestType>SQLQuery</RequestType>
+    </ConfigurePromptTemplate>
+  </Step>
+</fmxmlsnippet>

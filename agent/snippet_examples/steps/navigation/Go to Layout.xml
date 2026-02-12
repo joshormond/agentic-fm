@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Go to Layout">
+    <LayoutDestination value="OriginalLayout"/>
+  </Step>
+</fmxmlsnippet>

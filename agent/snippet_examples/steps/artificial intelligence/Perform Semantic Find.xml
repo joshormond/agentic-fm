@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Perform Semantic Find">
+    <LLMSemanticFind>
+      <Query type="1"/>
+      <Records type="1"/>
+    </LLMSemanticFind>
+  </Step>
+</fmxmlsnippet>

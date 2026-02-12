@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Configure Regression Model">
+    <LLMTrain>
+      <LLMTrainAction>LLMTrainTrainModel</LLMTrainAction>
+      <LLMAlgorithm>LLMTrainAlgForest</LLMAlgorithm>
+    </LLMTrain>
+  </Step>
+</fmxmlsnippet>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Open Transaction">
+    <Option state="False"/>
+    <ESSForceCommit state="False"/>
+    <SkipAutoEntry state="False"/>
+    <Restore state="False"/>
+  </Step>
+</fmxmlsnippet>
+<!-- Requires a matching Commit Transaction step to be present. -->

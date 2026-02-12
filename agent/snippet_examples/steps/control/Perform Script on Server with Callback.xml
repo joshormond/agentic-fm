@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Perform Script on Server with Callback">
+    <CallbackScriptState value="Continue"/>
+    <CallbackScript/>
+  </Step>
+</fmxmlsnippet>

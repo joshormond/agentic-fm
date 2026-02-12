@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Replace Field Contents">
+    <NoInteract state="True"/>
+    <Restore state="False"/>
+    <With value="None"/>
+    <SerialNumbers PerformAutoEnter="False" UpdateEntryOptions="False" increment="0" InitialValue="" UseEntryOptions="False"/>
+  </Step>
+</fmxmlsnippet>

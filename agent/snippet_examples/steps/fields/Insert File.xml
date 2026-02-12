@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Insert File">
+    <UniversalPathList type="Embedded"/>
+    <DialogOptions asFile="True" enable="False">
+      <Storage type="UserChoice"/>
+      <Compress type="UserChoice"/>
+      <FilterList/>
+    </DialogOptions>
+  </Step>
+</fmxmlsnippet>

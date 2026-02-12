@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Add Account">
+    <ChgPwdOnNextLogin value="False"/>
+    <AddAccount>
+      <AccountType>FileMaker</AccountType>
+    </AddAccount>
+  </Step>
+</fmxmlsnippet>

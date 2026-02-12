@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Insert Current User Name">
+    <SelectAll state="True"/>
+  </Step>
+</fmxmlsnippet>

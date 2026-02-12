@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Go to Related Record">
+    <Option state="False"/>
+    <MatchAllRecords state="False"/>
+    <ShowInNewWindow state="False"/>
+    <Restore state="False"/>
+    <LayoutDestination value="CurrentLayout"/>
+    <NewWndStyles Style="Document" Close="Yes" Minimize="Yes" Maximize="Yes" Resize="Yes" Styles="3606018"/>
+    <Table id="0" name=""/>
+  </Step>
+</fmxmlsnippet>
+<!-- Table id should be populated with the ID of the table to navigate to. -->

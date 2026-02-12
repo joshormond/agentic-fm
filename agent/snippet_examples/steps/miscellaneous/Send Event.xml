@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Send Event">
+    <ContentType value="File"/>
+    <Event CopyResultToClipboard="False" WaitForCompletion="False" BringTargetToForeground="False"/>
+  </Step>
+</fmxmlsnippet>

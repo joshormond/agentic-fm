@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Perform Find/Replace">
+    <NoInteract state="False"/>
+    <FindReplaceOperation MatchWholeWords="False" MatchCase="False" WithinOptions="All" AcrossOptions="All" direction="Forward" type="FindNext"/>
+  </Step>
+</fmxmlsnippet>

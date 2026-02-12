@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Read from Data File">
+    <DataSourceType value="3"/>
+  </Step>
+</fmxmlsnippet>

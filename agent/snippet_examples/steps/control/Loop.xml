@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Loop">
+    <Restore state="False"/>
+    <FlushType value="Always"/>
+  </Step>
+</fmxmlsnippet>
+<!-- Requires a matching End Loop step to be present. -->

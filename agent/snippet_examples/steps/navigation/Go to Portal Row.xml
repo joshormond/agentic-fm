@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Go to Portal Row">
+    <NoInteract state="False"/>
+    <SelectAll state="False"/>
+    <RowPageLocation value="First"/>
+  </Step>
+</fmxmlsnippet>

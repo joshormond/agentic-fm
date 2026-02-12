@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Enter Find Mode">
+    <Pause state="True"/>
+    <Restore state="False"/>
+  </Step>
+</fmxmlsnippet>

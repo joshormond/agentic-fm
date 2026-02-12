@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="0" name="Go to Record/Request/Page">
+    <NoInteract state="True"/>
+    <RowPageLocation value="First"/>
+  </Step>
+</fmxmlsnippet>
