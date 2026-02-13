@@ -4,5 +4,8 @@
     <NoStyle state="True"/>
     <SelectAll state="True"/>
     <LinkAvail state="False"/>
+    <Field table="" id="0" name=""/>
   </Step>
 </fmxmlsnippet>
+<!-- The <Field> element is optional. If not specified, then the current field is used if in focus. -->
+<!-- See https://help.claris.com/en/pro-help/content/paste.html -->

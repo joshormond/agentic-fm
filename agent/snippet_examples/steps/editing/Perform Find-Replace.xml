@@ -2,6 +2,24 @@
 <fmxmlsnippet type="FMObjectList">
   <Step enable="True" id="0" name="Perform Find/Replace">
     <NoInteract state="False"/>
-    <FindReplaceOperation MatchWholeWords="False" MatchCase="False" WithinOptions="All" AcrossOptions="All" direction="Forward" type="FindNext"/>
+    <FindReplaceOperation MatchWholeWords="True" MatchCase="True" WithinOptions="All" AcrossOptions="All" direction="Forward" type="FindNext"/>
+    <FindCalc>
+      <Calculation><![CDATA["find content"]]></Calculation>
+    </FindCalc>
+    <ReplaceCalc>
+      <Calculation><![CDATA["replace content"]]></Calculation>
+    </ReplaceCalc>
   </Step>
 </fmxmlsnippet>
+<!-- NoInteract state: "True" suppresses the Find/Replace Summary dialog (and the Replace All confirmation). "False" shows the dialog. -->
+<!-- FindReplaceOperation type: "FindNext" | "ReplaceAndFind" | "ReplaceAll" | "Replace" -->
+<!-- FindReplaceOperation direction: "Forward" | "Backward" -->
+<!-- FindReplaceOperation WithinOptions: "All" (all records/requests) | "Current" (current record/request) -->
+<!-- FindReplaceOperation AcrossOptions: "All" (all fields) | "Current" (current field) -->
+<!-- FindReplaceOperation MatchCase: "True" | "False" -->
+<!-- FindReplaceOperation MatchWholeWords: "True" | "False" -->
+<!-- Required: FindCalc (find term), FindReplaceOperation. -->
+<!-- Optional: ReplaceCalc (replace term, needed for Replace/ReplaceAll), NoInteract. -->
+<!-- FileMaker Pro only; not supported on Go, WebDirect, Server, Cloud, Data API, or CWP. -->
+<!-- Does not return an error if no matching data is found. -->
+<!-- See https://help.claris.com/en/pro-help/content/perform-find-replace.html -->

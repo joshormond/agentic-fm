@@ -4,3 +4,5 @@
     <UndoRedo value="Undo"/>
   </Step>
 </fmxmlsnippet>
+<!-- UndoRedo value: "Undo" | "Redo" | "Toggle" -->
+<!-- See https://help.claris.com/en/pro-help/content/undo-redo.html -->

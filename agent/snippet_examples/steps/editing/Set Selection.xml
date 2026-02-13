@@ -1,4 +1,20 @@
 <?xml version="1.0"?>
 <fmxmlsnippet type="FMObjectList">
-  <Step enable="True" id="0" name="Set Selection"/>
+  <Step enable="True" id="0" name="Set Selection">
+    <StartPosition>
+      <Calculation><![CDATA[1 // Start position]]></Calculation>
+    </StartPosition>
+    <EndPosition>
+      <Calculation><![CDATA[10 // End position]]></Calculation>
+    </EndPosition>
+    <Field table="" id="0" name=""/>
+  </Step>
 </fmxmlsnippet>
+<!-- Required: StartPosition, EndPosition. -->
+<!-- Optional: Field (target field). If omitted, the active field is used. -->
+<!-- Positions are 1-based character counts (including spaces). Selects from StartPosition through EndPosition inclusive. -->
+<!-- If StartPosition is in range but EndPosition is out of range, selects from StartPosition to end of field. -->
+<!-- Cursor positioning (no selection): Start=n, End=0 places cursor before position n. Start=0, End=n places cursor after position n. -->
+<!-- No action on container fields. -->
+<!-- In FileMaker Go, selected text is not highlighted if the keyboard is hidden. -->
+<!-- See https://help.claris.com/en/pro-help/content/set-selection.html -->
