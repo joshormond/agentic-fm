@@ -120,6 +120,45 @@ Open `MANIFEST.md` and add a row to the appropriate section table:
 - For functions, include the function name itself as a keyword.
 - For step patterns, include the names of the key script steps involved.
 
+### Example manifest
+
+A populated `MANIFEST.md` looks like this:
+
+```markdown
+# Library Manifest
+
+All paths are relative to `agent/library/`. Each entry includes a description and keyword tags used to match the item against a task before reading the file.
+
+---
+
+## Scripts — Complete reusable scripts
+
+| Path | Description | Keywords |
+|------|-------------|----------|
+| `Scripts/script - HTTP Request.xml` | Parameterized HTTP/API request handler; supports method, URL, headers, and body via JSON parameter; includes debug logging toggle | http, api, request, web service, fetch, post, get, insert from url |
+| `Scripts/script - Server Send Email.xml` | Send HTML email via SMTP from a server-side script | email, send email, smtp, html email, server email |
+
+---
+
+## Steps — Reusable step blocks and patterns
+
+| Path | Description | Keywords |
+|------|-------------|----------|
+| `Steps/steps - tryCatchTransaction.xml` | Try/catch with Open Transaction / Commit Transaction and rollback on error; `$errorLevel` tracking | transaction, try, catch, commit, rollback, open transaction, error rollback |
+| `Steps/steps - TimeoutSteps.xml` | Polling loop with timestamp-based timeout; uses Pause/Resume Script at 1/8 second intervals | timeout, wait, polling, pause, loop until, wait for condition |
+
+---
+
+## Functions — Custom function definitions
+
+| Path | Description | Keywords |
+|------|-------------|----------|
+| `Functions/JSON/function - JSONIsValid.xml` | `JSONIsValid(json)` — returns true if the value is a valid JSON object or array | json valid, validate json, json check, is json |
+| `Functions/Text/function - CSStoFMText.xml` | `CSStoFMText(text)` — converts CSS-styled HTML text to FileMaker styled text | css, html to fm text, styled text, text format, rich text |
+```
+
+Each category gets its own `##` section. AI reads only the sections and rows whose keywords match the current task.
+
 ---
 
 ## Using an existing snippet collection

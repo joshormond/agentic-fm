@@ -14,6 +14,7 @@ agent/docs/filemaker/error-codes.md
 # Specific files
 Prompt.md
 .cursorignore
+agent/library/MANIFEST.md
 
 # macOS
 .DS_Store
