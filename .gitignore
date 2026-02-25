@@ -89,6 +89,7 @@ lerna-debug.log*
 .settings/
 *.sublime-workspace
 *.sublime-project
+*.code-workspace
 
 # Python
 __pycache__/
