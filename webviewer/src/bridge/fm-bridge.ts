@@ -11,6 +11,8 @@ declare global {
     pushContext?: (jsonString: string) => void;
     loadScript?: (content: string, format?: string) => void;
     onClipboardReady?: () => void;
+    /** Trigger a Monaco editor action by action ID — called via Perform JavaScript in Web Viewer */
+    triggerEditorAction?: (actionId: string) => void;
   }
 }
 

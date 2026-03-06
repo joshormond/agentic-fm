@@ -12,24 +12,31 @@ This skill targets a matching pair of files within the project's parsed FileMake
 
 It returns the best match and the file paths needed to review/refactor it safely.
 
+## Multi-solution structure
+
+`xml_parsed/` is organized with **one subfolder per solution file** (e.g., `xml_parsed/scripts_sanitized/Invoice Solution/`). A developer may work across multiple solutions or multiple files within a solution (data separation model). Always use Bash `ls` — not Glob — to list subfolders, because solution names often contain spaces that break Glob patterns.
+
 ## Quick start
 
 When invoked:
 
-1. Extract **script ID** and/or **script name** from the user's request.
-2. Look for any existing **fmxmlsnippet** version to use as an editable base within these locations. In-progress work may be ongoing check this folder first.
+1. **Determine the solution subfolder** — list subdirectories under `agent/xml_parsed/scripts_sanitized/` using Bash `ls`.
+   - If only one subfolder exists, use it automatically (note the name in the report).
+   - If multiple subfolders exist, use `AskUserQuestion` to ask which solution the developer is working with before proceeding.
+2. Extract **script ID** and/or **script name** from the user's request.
+3. Look for any existing **fmxmlsnippet** version to use as an editable base within these locations. In-progress work may be ongoing — check this folder first.
    - `agent/sandbox`
-3. Locate the paired parsed XML artifacts. These are the original references for anything from the previous step.
-   - `scripts_sanitized` (readable)
-   - `scripts` (Save-As-XML reference)
-4. Output the **Script match report** (template below) also indicating location.
-5. Use `AskQuestion` to confirm this is the intended target script (see **Confirmation step** below).
-6. If confirmed and the user asked to **review/refactor/optimize**, proceed with the handoff workflow.
+4. Locate the paired parsed XML artifacts within the chosen solution subfolder. These are the original references for anything from the previous step.
+   - `scripts_sanitized/<solution>/` (readable)
+   - `scripts/<solution>/` (Save-As-XML reference)
+5. Output the **Script match report** (template below) also indicating location.
+6. Use `AskUserQuestion` to confirm this is the intended target script (see **Confirmation step** below).
+7. If confirmed and the user asked to **review/refactor/optimize**, proceed with the handoff workflow.
 
 ### Parsed XML artifacts (read-only reference)
 
-- `agent/xml_parsed/scripts_sanitized/` (human-readable; best for quick understanding + matching)
-- `agent/xml_parsed/scripts/` (FileMaker "Save a Copy As XML" format; **never** output directly)
+- `agent/xml_parsed/scripts_sanitized/<solution>/` (human-readable; best for quick understanding + matching)
+- `agent/xml_parsed/scripts/<solution>/` (FileMaker "Save a Copy As XML" format; **never** output directly)
 
 **If `agent/xml_parsed/` does not exist or is empty**, report that explicitly and stop the lookup (do not guess and do not use anything else in the folder hierarchy).
 
@@ -55,12 +62,14 @@ Normalize name hints:
 
 ## Matching workflow (deterministic, then fuzzy)
 
+All searches are scoped to the chosen solution subfolder determined in the Quick start step.
+
 Follow this order and stop at the first **high confidence** match:
 
 1. **ID match** (highest confidence)
-   - Find a script with that ID (The file name will always include the id such as `... - ID 123$`).
-   - Use `fd` first if avaiable.
-   - Use a variation of `find . -type f -name "*103*"` within the `agent/xml_parsed` and modify find as needed.
+   - Find a script with that ID (the file name will always include the id such as `... - ID 123`).
+   - Use `fd` first if available, scoped to the solution subfolder.
+   - Otherwise: `find "agent/xml_parsed/scripts_sanitized/<solution>" -type f -name "*123*"`
 2. **Exact name match** (case-insensitive)
 3. **Contains match** (all tokens present in candidate name)
 4. **Fuzzy match** (rank candidates; return top 3–5)
@@ -69,7 +78,7 @@ If multiple candidates are close:
 
 - Choose the best match and continue.
 - Include alternates in the Script match report so the user can redirect quickly.
-- The `AskQuestion` confirmation step (below) acts as the natural redirect gate — do not separately block on a question here.
+- The `AskUserQuestion` confirmation step (below) acts as the natural redirect gate — do not separately block on a question here.
 
 ## Mapping between sanitized and Save-As-XML variants
 
@@ -134,29 +143,39 @@ If the user request is a review/refactor/optimization:
 
 ## Examples
 
-### Example 1 — ID-based
+### Example 1 — Single solution, ID-based
 
 User: "Review script ID 123"
 
-- Perform an ID match.
+- `ls agent/xml_parsed/scripts_sanitized/` → one subfolder: `Invoice Solution` — use automatically.
+- ID match: `find "agent/xml_parsed/scripts_sanitized/Invoice Solution" -name "*123*"`
 - Output the Script match report.
-- Use `AskQuestion`: "Is this the correct script? — Script Name (ID: 123)"
+- Use `AskUserQuestion`: "Is this the correct script? — Script Name (ID: 123) in Invoice Solution"
 - On confirmation: proceed with `script-review`; convert via `fm_xml_to_snippet.py` if no fmxmlsnippet exists.
 
-### Example 2 — Name-based
+### Example 2 — Multiple solutions present
+
+User: "Review the New Invoice script"
+
+- `ls agent/xml_parsed/scripts_sanitized/` → two subfolders: `Invoice Solution`, `Data File`
+- `AskUserQuestion`: "Multiple solution files found: Invoice Solution, Data File — which are you working with?"
+- User selects → scope search to that subfolder, proceed with name match.
+
+### Example 3 — Name-based, single solution
 
 User: "I'd like to do a review of the New Invoice for Client script"
 
+- `ls agent/xml_parsed/scripts_sanitized/` → one subfolder, use automatically.
 - Normalize name hint: "new invoice for client"
-- Exact/contains/fuzzy match in `agent/xml_parsed/scripts_sanitized/`.
+- Exact/contains/fuzzy match within the solution subfolder.
 - Output the Script match report (include alternates if ambiguous).
-- Use `AskQuestion`: "Is this the correct script? — New Invoice for Client (ID: 456)"
+- Use `AskUserQuestion`: "Is this the correct script? — New Invoice for Client (ID: 456) in Invoice Solution"
 - On confirmation: proceed with `script-review`; convert via `fm_xml_to_snippet.py` if no fmxmlsnippet exists.
 
-### Example 3 — Ambiguous name
+### Example 4 — Ambiguous name
 
 User: "Show me the invoice script"
 
-- Fuzzy match, pick the best candidate.
+- Fuzzy match within the solution subfolder, pick the best candidate.
 - Include alternates prominently in the report.
-- Use `AskQuestion` to confirm the best candidate before proceeding.
+- Use `AskUserQuestion` to confirm the best candidate before proceeding.

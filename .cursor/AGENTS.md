@@ -8,6 +8,8 @@ This project is designed to create FileMaker scripts in the clipboard supported 
 - _xml_parsed_ is the xml output from the FileMaker solution.
   - _scripts_ subfolder contains the xml details of scripts from the solution. NOTE: This xml is not the same as the fmxmlsnippet format. It has been output from the Save As XML option in FileMaker. Use `agent/scripts/fm_xml_to_snippet.py` to convert a file from this folder into fmxmlsnippet format when needed (e.g. after script-lookup confirmation when no fmxmlsnippet already exists in `agent/scripts/` or `agent/sandbox/`).
   - _scripts_sanitized_ subfolder is the human-readable text version of a script. Logic and flow can be referenced here.
+  - _custom_menus_ subfolder contains one XML file per custom menu exported from the solution.
+  - _custom_menu_sets_ subfolder contains one XML file per custom menu set exported from the solution.
 - _catalogs/_ contains the step catalog (`step-catalog-en.json`) — a structured index of all FileMaker script steps with parameter definitions, types, enums, and HR signatures. This is the primary reference for step XML structure.
 - _snippet_examples_ is a reference folder where boilerplate xml can be referenced when needed. It remains the authoritative source for complex steps and behavioral notes not captured in the catalog.
 
@@ -120,6 +122,20 @@ Only fall back to grepping `agent/xml_parsed/` if the needed information is not 
 - ALWAYS use grep to search rather than reading full file contents
 - Prefer `scripts_sanitized/` for understanding script logic over `scripts/` XML
 - Extract ONLY the id and name attributes needed for references
+
+## Custom menus
+
+Custom menus and menu sets are a distinct object type from scripts. They use a different clipboard format (`ut16` Unicode text rather than binary FM descriptors), a different XML wrapper (`<FMObjectTransfer>` not `<fmxmlsnippet>`), and require real UUIDs from the solution before any paste operation will succeed.
+
+**MANDATORY: Before creating or modifying any custom menu XML, use the `menu-lookup` skill** to locate the existing menu in `xml_parsed/custom_menus/` or `xml_parsed/custom_menu_sets/` and extract the real `CustomMenuCatalog UUID` and `CustomMenu UUID`. Without these, FileMaker silently ignores the paste.
+
+Full XML patterns, clipboard format details, shortcut encoding, and the `<Override>` attribute rules are documented in `agent/docs/CUSTOM_MENUS.md`.
+
+To write a menu XML file to the clipboard:
+```bash
+python agent/scripts/clipboard.py write agent/sandbox/<menu>.xml
+```
+Auto-detection recognises `<CustomMenu` and `<CustomMenuSet` elements and routes to the `ut16` write path automatically.
 
 # Coding Conventions
 

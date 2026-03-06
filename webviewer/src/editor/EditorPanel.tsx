@@ -55,6 +55,11 @@ export function EditorPanel({ value, onChange, context }: EditorPanelProps) {
 
     editorRef.current = editor;
 
+    // Expose global trigger for FileMaker "Perform JavaScript in Web Viewer"
+    (window as any).triggerEditorAction = (actionId: string) => {
+      editor.trigger('fm', actionId, null);
+    };
+
     // Listen for changes
     editor.onDidChangeModelContent(() => {
       onChange(editor.getValue());
@@ -64,6 +69,7 @@ export function EditorPanel({ value, onChange, context }: EditorPanelProps) {
     const diagDisposable = attachDiagnostics(editor, catalog);
 
     return () => {
+      delete (window as any).triggerEditorAction;
       diagDisposable.dispose();
       editor.dispose();
       editorRef.current = null;
