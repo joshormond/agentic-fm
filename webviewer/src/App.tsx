@@ -88,6 +88,7 @@ export function App() {
     return () => {
       delete (window as any).pushContext;
       delete (window as any).loadScript;
+      delete (window as any).triggerAppAction;
     };
   }, []);
 
@@ -160,6 +161,20 @@ export function App() {
     setStatus(`Loaded: ${name}`);
     if (options.resetChat) setChatKey(k => k + 1);
   }, []);
+
+  // Expose app-level toolbar actions for FileMaker JS bridge (agfm.* action IDs)
+  useEffect(() => {
+    (window as any).triggerAppAction = (actionId: string) => {
+      switch (actionId) {
+        case 'agfm.newScript':       handleNewScript(); break;
+        case 'agfm.validate':        handleValidate(); break;
+        case 'agfm.clipboard':       handleClipboard(); break;
+        case 'agfm.loadScript':      setShowLoadScript(true); break;
+        case 'agfm.toggleXmlPreview': setShowXmlPreview(v => !v); break;
+        case 'agfm.toggleChat':      setShowChat(v => !v); break;
+      }
+    };
+  }, [handleNewScript, handleValidate, handleClipboard]);
 
   return (
     <div class="flex flex-col h-full">

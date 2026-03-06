@@ -13,6 +13,8 @@ declare global {
     onClipboardReady?: () => void;
     /** Trigger a Monaco editor action by action ID — called via Perform JavaScript in Web Viewer */
     triggerEditorAction?: (actionId: string) => void;
+    /** Trigger an app-level toolbar action by action ID — called via Perform JavaScript in Web Viewer */
+    triggerAppAction?: (actionId: string) => void;
   }
 }
 
