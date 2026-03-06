@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<fmxmlsnippet type="FMObjectList">
+  <Script includeInMenu="False" SiriShortcutVisible="False" runFullAccess="False" id="271" name="Agentic-fm Menu">
+    <Step enable="True" id="89" name="# (comment)">
+      <Text>PURPOSE: Handle all menu calls from a custom menu and pass through to a web viewer.</Text>
+    </Step>
+    <Step enable="True" id="89" name="# (comment)"/>
+    <Step enable="True" id="89" name="# (comment)">
+      <Text>NOTE: This relies on a custom menu set being attached to the layout where the agentic-fm web viewer object is being used.</Text>
+    </Step>
+    <Step enable="True" id="89" name="# (comment)"/>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[Get ( ScriptParameter )]]></Calculation>
+      </Value>
+      <Name>$action</Name>
+    </Step>
+    <Step enable="True" id="89" name="# (comment)"/>
+    <Step enable="True" id="68" name="If">
+      <Restore state="False"/>
+      <Calculation><![CDATA[Left ( $action ; 5 ) = "agfm."]]></Calculation>
+    </Step>
+    <Step enable="True" id="175" name="Perform JavaScript in Web Viewer">
+      <ObjectName>
+        <Calculation><![CDATA["agentic-fm"]]></Calculation>
+      </ObjectName>
+      <FunctionName>
+        <Calculation><![CDATA["triggerAppAction"]]></Calculation>
+      </FunctionName>
+      <Parameters Count="1">
+        <P>
+          <Calculation><![CDATA[$action]]></Calculation>
+        </P>
+      </Parameters>
+    </Step>
+    <Step enable="True" id="69" name="Else">
+      <Restore state="False"/>
+    </Step>
+    <Step enable="True" id="175" name="Perform JavaScript in Web Viewer">
+      <ObjectName>
+        <Calculation><![CDATA["agentic-fm"]]></Calculation>
+      </ObjectName>
+      <FunctionName>
+        <Calculation><![CDATA["triggerEditorAction"]]></Calculation>
+      </FunctionName>
+      <Parameters Count="1">
+        <P>
+          <Calculation><![CDATA[$action]]></Calculation>
+        </P>
+      </Parameters>
+    </Step>
+    <Step enable="True" id="70" name="End If"/>
+    <Step enable="True" id="89" name="# (comment)"/>
+    <Step enable="True" id="103" name="Exit Script"/>
+  </Script>
+</fmxmlsnippet>

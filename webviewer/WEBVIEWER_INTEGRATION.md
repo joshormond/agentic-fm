@@ -220,20 +220,20 @@ The system prompt (`src/ai/prompt/system-prompt.ts`) provides the AI with contex
 
 The two interaction modes use fundamentally different context delivery strategies:
 
-| Capability | CLI / IDE (Claude Code) | Webviewer AI |
-|---|---|---|
-| Filesystem access | Full (read/write) | None |
-| CONTEXT.json | Read on demand via tool call | Formatted and injected at startup |
-| Coding conventions | Read on demand | Injected into every system prompt |
-| Knowledge base | Selective: scans MANIFEST, reads only matching docs | All docs injected wholesale |
-| Step catalog | Grepped per-step (~60 lines each) | All known HR signatures injected |
-| Index files (`context/*.index`) | Grepped on demand | Not available |
-| `xml_parsed/` | Grepped on demand | Not available |
-| Script validation | Runs `validate_snippet.py` subprocess | Via `/api/validate` endpoint |
-| Clipboard | Runs `clipboard.py` subprocess | Via `/api/clipboard` endpoints |
-| Token cost | Variable — only what's needed, when needed | Fixed upfront injection on every request |
-| Output format | fmxmlsnippet XML → written to `agent/sandbox/` | HR script text → converted client-side |
-| Multi-step workflows | Full agentic tool use | Single-turn chat |
+| Capability                      | CLI / IDE (Claude Code)                             | Webviewer AI                             |
+| ------------------------------- | --------------------------------------------------- | ---------------------------------------- |
+| Filesystem access               | Full (read/write)                                   | None                                     |
+| CONTEXT.json                    | Read on demand via tool call                        | Formatted and injected at startup        |
+| Coding conventions              | Read on demand                                      | Injected into every system prompt        |
+| Knowledge base                  | Selective: scans MANIFEST, reads only matching docs | All docs injected wholesale              |
+| Step catalog                    | Grepped per-step (~60 lines each)                   | All known HR signatures injected         |
+| Index files (`context/*.index`) | Grepped on demand                                   | Not available                            |
+| `xml_parsed/`                   | Grepped on demand                                   | Not available                            |
+| Script validation               | Runs `validate_snippet.py` subprocess               | Via `/api/validate` endpoint             |
+| Clipboard                       | Runs `clipboard.py` subprocess                      | Via `/api/clipboard` endpoints           |
+| Token cost                      | Variable — only what's needed, when needed          | Fixed upfront injection on every request |
+| Output format                   | fmxmlsnippet XML → written to `agent/sandbox/`      | HR script text → converted client-side   |
+| Multi-step workflows            | Full agentic tool use                               | Single-turn chat                         |
 
 The CLI agent can also access the full `agent/library/` of reusable snippets, the `snippet_examples/` templates for complex steps, and can run arbitrary shell commands as part of its toolchain. None of these are available to the webviewer AI.
 
@@ -241,16 +241,16 @@ The CLI agent can also access the full `agent/library/` of reusable snippets, th
 
 Every AI request in the webviewer carries a fixed system prompt overhead. With all resources injected, the breakdown is:
 
-| Resource | Approx. tokens | Notes |
-|---|---|---|
-| Base instructions | ~400 | Format rules, output constraints |
-| Step catalog (known signatures) | ~3,800 | 197 steps with HR signatures |
-| CONTEXT.json (formatted) | ~500 – 2,000 | Varies by solution size |
-| Coding conventions | ~2,100 | `agent/docs/CODING_CONVENTIONS.md` |
-| Knowledge docs — `field-references.md` | ~1,275 | |
-| Knowledge docs — `found-sets.md` | ~3,000 | |
-| Knowledge docs — `terminology.md` | ~11,400 | Largest single doc (~73% of knowledge total) |
-| **Total (approximate)** | **~22,500 – 24,000** | Before conversation history |
+| Resource                               | Approx. tokens       | Notes                                        |
+| -------------------------------------- | -------------------- | -------------------------------------------- |
+| Base instructions                      | ~400                 | Format rules, output constraints             |
+| Step catalog (known signatures)        | ~3,800               | 197 steps with HR signatures                 |
+| CONTEXT.json (formatted)               | ~500 – 2,000         | Varies by solution size                      |
+| Coding conventions                     | ~2,100               | `agent/docs/CODING_CONVENTIONS.md`           |
+| Knowledge docs — `field-references.md` | ~1,275               |                                              |
+| Knowledge docs — `found-sets.md`       | ~3,000               |                                              |
+| Knowledge docs — `terminology.md`      | ~11,400              | Largest single doc (~73% of knowledge total) |
+| **Total (approximate)**                | **~22,500 – 24,000** | Before conversation history                  |
 
 `terminology.md` dominates — it is a broad FileMaker terminology reference (~45 KB) rather than targeted behavioral guidance. As the knowledge base grows, blanket injection will become increasingly expensive.
 
@@ -274,10 +274,10 @@ The webviewer's **primary runtime environment is a FileMaker WebViewer object**,
 
 There are two distinct paths by which CONTEXT.json can reach the client, and they behave differently:
 
-| Path | How it works | When it fires |
-|---|---|---|
-| **Direct JS bridge** | FileMaker's `Perform JavaScript in Web Viewer` step calls `window.pushContext(json)` → `setContext()` in App.tsx | When the Push Context companion script calls into the webviewer directly |
-| **File on disk** | Push Context writes `CONTEXT.json` to disk; the client polls `/api/context` and detects the change via JSON hash comparison | When the script runs in a separate window, or via any other process that writes the file |
+| Path                 | How it works                                                                                                                | When it fires                                                                            |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| **Direct JS bridge** | FileMaker's `Perform JavaScript in Web Viewer` step calls `window.pushContext(json)` → `setContext()` in App.tsx            | When the Push Context companion script calls into the webviewer directly                 |
+| **File on disk**     | Push Context writes `CONTEXT.json` to disk; the client polls `/api/context` and detects the change via JSON hash comparison | When the script runs in a separate window, or via any other process that writes the file |
 
 Polling (path 2) is the reliable fallback. Vite's HMR WebSocket and `import.meta.hot` custom events are **not reliable inside a FileMaker WebKit webviewer** — the WebSocket connection may not deliver custom broadcast events in that environment. Any feature that needs to react to server-side file changes should use HTTP polling rather than WebSocket/HMR events.
 
@@ -295,6 +295,31 @@ When running inside a FileMaker WebViewer object (vs. a browser), the bridge lay
 - **Callbacks** (`src/bridge/callbacks.ts`): Routes incoming FileMaker calls to registered handlers
 
 The app functions fully in a browser without FileMaker present; the bridge layer degrades gracefully.
+
+---
+
+## FileMaker Layout Setup
+
+### Web viewer object
+
+The webviewer runs inside a FileMaker WebViewer object set to the Vite dev server URL (`http://localhost:8080`). The object must be named **`agentic-fm`** — this name is used by the bridge script to target the correct viewer when passing actions from custom menu items.
+
+The web viewer can be placed on any layout, but a **dedicated layout** is strongly recommended:
+
+- Place only the single web viewer object on the layout, leaving no other interactive objects
+- Set the web viewer to be **resizable** using the autosizing anchors in the Inspector palette. This is so developers can expand it to a comfortable working size
+
+A dedicated layout avoids interference from other layout objects and ensures the custom menu set (which is assigned per-layout) applies consistently whenever the editor is open.
+
+### Custom menu integration (optional)
+
+This is a **very beneficial**, although optional, addition to using the webviewer feature of this project!
+
+The `filemaker/custom_menu/` folder contains a pre-built menu set that adds five editor-aware menus — File, Edit, Selection, Format, View — to the layout hosting the web viewer. Each menu item routes a Monaco action ID through a bridge script to the `agentic-fm` web viewer object.
+
+Because FileMaker uses solution-specific UUIDs and script IDs, the files cannot be pasted directly — an agent must substitute your solution's IDs first. See `filemaker/custom_menu/README.md` for the step-by-step integration process.
+
+After integrating the custom menu set, you need to set the `agentic-fm` custom menu as the default within the Layout Setup… dialog for the layout.
 
 ---
 
@@ -376,9 +401,9 @@ Monaco editor options are centralized in `src/editor/editor.config.ts`. Edit thi
 export const editorConfig = {
   fontSize: 14,
   tabSize: 4,
-  insertSpaces: false,   // false = tab characters; true = spaces
-  wordWrap: 'on',
-  renderWhitespace: 'selection',
+  insertSpaces: false, // false = tab characters; true = spaces
+  wordWrap: "on",
+  renderWhitespace: "selection",
   // ...
 };
 ```

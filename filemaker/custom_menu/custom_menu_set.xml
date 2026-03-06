@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-16"?>
+<FMObjectTransfer membercount="1" version="1" Source="22.0.4" File="Invoice Solution.fmp12" UUID="7437B702-0720-3641-982A-3AFBA7A31480" locale="English" Has_DDR_INFO="False" timestamp="2026-03-06T17:54:28">
+  <CustomMenuSetCatalog membercount="1">
+    <UUID modifications="21" userName="Matt" accountName="admin" timestamp="2026-03-06T14:40:56">6A164670-E37A-A747-9F6B-3AE1986ECE22</UUID>
+    <TagList></TagList>
+    <CustomMenuSetReference id="1" name="[Standard FileMaker Menus]" UUID="03CF6853-BB49-B945-AFA7-306633B65B14"></CustomMenuSetReference>
+    <ObjectList membercount="1">
+      <CustomMenuSet name="agentic-fm" id="2" comment="Used for the embedded editor">
+        <UUID modifications="19" userName="Matt" accountName="admin" timestamp="2026-03-06T14:40:56">EA7B04A7-1BBD-44B0-B6D2-FB63AAE9276E</UUID>
+        <TagList></TagList>
+        <CustomMenuList membercount="5">
+          <CustomMenuReference name="agentic-fm — File" id="26"></CustomMenuReference>
+          <CustomMenuReference name="agentic-fm — Edit" id="27"></CustomMenuReference>
+          <CustomMenuReference name="agentic-fm — Selection" id="29"></CustomMenuReference>
+          <CustomMenuReference name="agentic-fm — Format" id="40"></CustomMenuReference>
+          <CustomMenuReference name="agentic-fm — View" id="43"></CustomMenuReference>
+        </CustomMenuList>
+      </CustomMenuSet>
+    </ObjectList>
+  </CustomMenuSetCatalog>
+  <PasteIndexList membercount="1">
+    <Object id="2"></Object>
+  </PasteIndexList>
+</FMObjectTransfer>

@@ -1,0 +1,1867 @@
+<?xml version="1.0" encoding="utf-16"?>
+<FMObjectTransfer membercount="5" version="1" Source="22.0.4" File="Invoice Solution.fmp12" UUID="7437B702-0720-3641-982A-3AFBA7A31480" locale="English" Has_DDR_INFO="False" timestamp="2026-03-06T17:55:23">
+  <CustomMenuCatalog membercount="5">
+    <UUID modifications="27" userName="Matt" accountName="admin" timestamp="2026-03-06T14:40:56">33EDFC8F-2D5C-0347-8D71-87E8F62F3CB4</UUID>
+    <TagList></TagList>
+    <CustomMenu name="agentic-fm — File" id="26">
+      <UUID modifications="10" userName="Matt" accountName="admin" timestamp="2026-03-06T14:38:28">66C4A893-1C9A-43AF-A791-30DD642E5594</UUID>
+      <TagList></TagList>
+      <MenuItemList membercount="17">
+        <CustomMenuItem hash="3B3934A332688A6902289572040773C2" index="0" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>6E85BA01-6886-4070-B7AA-089F8FD54903</UUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "agfm.newScript" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["agfm.newScript"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"agfm.newScript"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["New Script"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Shortcut key="78" modifier="4"></Shortcut>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="True"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="9B303CD3A2CF5D850DC08381CBA548E9" index="1" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>DB720F59-262B-4A18-B49E-B0AD256E4DD3</UUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "agfm.loadScript" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["agfm.loadScript"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"agfm.loadScript"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Load Script"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Shortcut key="79" modifier="4"></Shortcut>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="True"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="907E07CF7C25B714141F141232035B1A" index="2" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>654809D0-3D04-4C68-9D99-4E6FBA148FA3</UUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "agfm.toggleChat" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["agfm.toggleChat"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"agfm.toggleChat"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Toggle Agent"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Shortcut key="65" modifier="5"></Shortcut>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="True"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="C44EFE1F74F67C24CEA62EE87A302F66" index="3" isSubMenuItem="False" isSeparatorItem="True">
+          <UUID>DA41779C-5052-4B2E-ADB9-648B80D1E450</UUID>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="40A90A60AEC4E24270A18005B5C4F710" index="4" isSubMenuItem="True" isSeparatorItem="False">
+          <UUID>CA1AC2EC-6BCD-47B2-9F49-AD53871382BF</UUID>
+          <CustomMenuReference id="23" name="[Favorites]"></CustomMenuReference>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="0BEF16399B9FC73D82CFE23C9A65FD46" index="5" isSubMenuItem="True" isSeparatorItem="False">
+          <UUID>A078147F-4FF1-4AC6-9957-1E9CBAEFB121</UUID>
+          <CustomMenuReference id="4" name="[Recent]"></CustomMenuReference>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="D22D7FC43C9D7936FE80CD66859C1F44" index="6" isSubMenuItem="True" isSeparatorItem="False">
+          <UUID>D62B7BB1-3AB4-47CB-85F1-9AFA98850EA0</UUID>
+          <CustomMenuReference id="24" name="[Hosts]"></CustomMenuReference>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="FD191BA1A60A12536F5491B2773610A2" index="7" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>BFB839B6-825C-4A6E-A32B-35408922E496</UUID>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Shortcut key="79" modifier="4"></Shortcut>
+          <Command name="Open..." id="57601"></Command>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="E9BF15746658F1E2A8F7BCF09C518616" index="8" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>4B708FCB-FF98-49BE-B129-418277E367DD</UUID>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Shortcut key="75" modifier="4"></Shortcut>
+          <Command name="Open Quickly..." id="49319"></Command>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="54A95E5857712C3903A1E120ECF49EDF" index="9" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>BE8531D9-3C40-4777-AA07-60250C900758</UUID>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Shortcut key="87" modifier="4"></Shortcut>
+          <Command name="Close" id="57602"></Command>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="B394E11397329E64B3A5EADE88CD0CD3" index="10" isSubMenuItem="False" isSeparatorItem="True">
+          <UUID>EC2FD3BF-30D6-45C7-90E3-5E1C9298B0D6</UUID>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="92025E10580CF44F71D2557EA46C1E24" index="11" isSubMenuItem="True" isSeparatorItem="False">
+          <UUID>19F9C6FD-B57C-4CB0-B64A-021CBF8A37EC</UUID>
+          <CustomMenuReference id="9" name="[Manage]"></CustomMenuReference>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="517471FDE72FD3440F6A5DF8B4E0EBF8" index="12" isSubMenuItem="False" isSeparatorItem="True">
+          <UUID>0D671ADB-887C-4CA2-BDF4-C0B2A18A08A9</UUID>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="479850ED704502FD555E267A60B3FC2F" index="13" isSubMenuItem="True" isSeparatorItem="False">
+          <UUID>24B67B90-07C3-4F55-ADE0-F978BA36E9EB</UUID>
+          <CustomMenuReference id="13" name="[Sharing]"></CustomMenuReference>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="00252D8F93EF282D0B2A8D1B15BB5F7F" index="14" isSubMenuItem="False" isSeparatorItem="True">
+          <UUID>4B94E632-90AB-4F1A-877F-55B41AF5E5B6</UUID>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="B6F6EFD783C71399635D30D3F3F2B44C" index="15" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>A0A947AA-B698-487E-9EC5-49685F2DB2D9</UUID>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Shortcut key="79" modifier="8"></Shortcut>
+          <Command name="File Options..." id="49154"></Command>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="9823FB11B6E79D462769C89A7B8FBCCC" index="16" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>AAE45F52-1886-4436-94BB-06E44E9BF1C8</UUID>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Command name="Change Password..." id="50152"></Command>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+      </MenuItemList>
+      <Conditions>
+        <Install>
+          <Calculation>
+            <Text>
+              <![CDATA[1]]>
+            </Text>
+          </Calculation>
+        </Install>
+      </Conditions>
+      <Comment></Comment>
+      <Base name="File" value="2"></Base>
+      <Options browseMode="True" findMode="True" previewMode="True">
+        <Override>
+          <Title>
+            <Calculation>
+              <Text>
+                <![CDATA["File"]]>
+              </Text>
+            </Calculation>
+          </Title>
+        </Override>
+      </Options>
+    </CustomMenu>
+    <CustomMenu name="agentic-fm — Edit" id="27">
+      <UUID modifications="7" userName="Matt" accountName="admin" timestamp="2026-03-06T14:40:14">CB09E235-3066-4196-9C3F-28F432F38233</UUID>
+      <TagList></TagList>
+      <MenuItemList membercount="16">
+        <CustomMenuItem hash="3A8E3A30B074185B6948EF0158952586" index="0" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>584C8120-509D-4702-BCC6-FD10777D8EEF</UUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "undo" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["undo"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"undo"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Shortcut key="90" modifier="4"></Shortcut>
+          <Command name="Undo" id="49320"></Command>
+          <Override name="False" action="True" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="CA6E85EC97A25606E155115F434BDB53" index="1" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>F38F0451-C1AB-4D43-8DF4-4A038EC77DD7</UUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "redo" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["redo"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"redo"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Shortcut key="90" modifier="5"></Shortcut>
+          <Command name="Redo" id="49321"></Command>
+          <Override name="False" action="True" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="91ECBDD0E5C55A9D1F4280B0B2042B50" index="2" isSubMenuItem="False" isSeparatorItem="True">
+          <UUID>CF0A3123-2118-4CB9-A37D-3AAE4819D172</UUID>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="BF39E70473BA4A541C7F1BE4968421B5" index="3" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>EAE51024-9FA2-49B1-8A5A-455F10D1502B</UUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.clipboardCutAction" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.clipboardCutAction"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.clipboardCutAction"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Shortcut key="88" modifier="4"></Shortcut>
+          <Command name="Cut" id="57635"></Command>
+          <Override name="False" action="True" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="E95F7A072A3F76C799307DA824515BE0" index="4" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>E5ADD24C-BBDD-465B-A5CA-E4F3CDCCB484</UUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.clipboardCopyAction" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.clipboardCopyAction"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.clipboardCopyAction"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Shortcut key="67" modifier="4"></Shortcut>
+          <Command name="Copy" id="57634"></Command>
+          <Override name="False" action="True" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="FB015FAA8F149AC7087E7841FB4938BF" index="5" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>B36DB062-D701-4316-BAF1-F10C84B91600</UUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.clipboardPasteAction" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.clipboardPasteAction"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.clipboardPasteAction"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Shortcut key="86" modifier="4"></Shortcut>
+          <Command name="Paste" id="57637"></Command>
+          <Override name="False" action="True" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="5F6ED74167EE148184DA4AE2143C638F" index="6" isSubMenuItem="False" isSeparatorItem="True">
+          <UUID>2C84D767-F632-4824-92BB-E0A37A461A90</UUID>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="24C5F04EF0407C270997E8DEBEA20801" index="7" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>16FF9ADE-954A-490A-99C1-6F86CDF036F1</UUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.selectAll" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.selectAll"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.selectAll"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Shortcut key="65" modifier="4"></Shortcut>
+          <Command name="Select All" id="57642"></Command>
+          <Override name="False" action="True" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="E41FF171C36A6E168AD4611E7D04ACD1" index="8" isSubMenuItem="False" isSeparatorItem="True">
+          <UUID>1C1E3C8D-6156-4E20-BB6E-4B97F9DFD3D0</UUID>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="53DFDFC13621EB0E305E76F19111C7C3" index="9" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>361097DD-16D3-470B-B990-9DB9B08D8E2D</UUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "actions.find" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["actions.find"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"actions.find"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Find…"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Shortcut key="70" modifier="4"></Shortcut>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="True"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="8783C73F61B5A5E9BE42D0DCA8C7F22A" index="10" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>3E16F0E4-FB05-4BD5-BDBB-FC7FCE55C40E</UUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.startFindReplaceAction" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.startFindReplaceAction"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.startFindReplaceAction"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Find & Replace…"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Shortcut key="70" modifier="5"></Shortcut>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="True"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="37E78D05C658A5C8472B8EFBB8AE0F17" index="11" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>E99512F8-EA29-481A-B177-AB543A11F530</UUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.nextMatchFindAction" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.nextMatchFindAction"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.nextMatchFindAction"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Find Next"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Shortcut key="71" modifier="4"></Shortcut>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="True"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="CD6F2A3E3A7D31DDFB2845998CEB3D82" index="12" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>B2F238AC-A1AA-49DF-BE5F-23B8FAB7085F</UUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.previousMatchFindAction" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.previousMatchFindAction"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.previousMatchFindAction"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Find Previous"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Shortcut key="71" modifier="5"></Shortcut>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="True"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="F14A60EBF79938CD514F64046D8CB6F9" index="13" isSubMenuItem="False" isSeparatorItem="True">
+          <UUID>5028F79A-EFC8-4344-81E6-AE9647626D8B</UUID>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[If( Abs(Get( SystemPlatform )) = 2; 1; 0 )]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="EBF0106F30B8AEB0824718A2897EF545" index="14" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>BA31B640-21E6-448F-B6A6-220B0DE21D54</UUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "agfm.validate" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["agfm.validate"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"agfm.validate"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Validate script"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Shortcut key="86" modifier="5"></Shortcut>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="True"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="5F25B6F0A7277B3D07D76F06F3552B34" index="15" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>AC084CC5-FA46-4BD5-BD36-24FD729133AC</UUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "agfm.clipboard" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["agfm.clipboard"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"agfm.clipboard"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Copy script steps"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Shortcut key="67" modifier="5"></Shortcut>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="True"></Override>
+        </CustomMenuItem>
+      </MenuItemList>
+      <Conditions>
+        <Install>
+          <Calculation>
+            <Text>
+              <![CDATA[1]]>
+            </Text>
+          </Calculation>
+        </Install>
+      </Conditions>
+      <Comment></Comment>
+      <Base name="Edit" value="3"></Base>
+      <Options browseMode="True" findMode="True" previewMode="True">
+        <Override>
+          <Title>
+            <Calculation>
+              <Text>
+                <![CDATA["Edit"]]>
+              </Text>
+            </Calculation>
+          </Title>
+        </Override>
+      </Options>
+    </CustomMenu>
+    <CustomMenu name="agentic-fm — Selection" id="29">
+      <UUID modifications="3" userName="Matt" accountName="admin" timestamp="2026-03-06T13:22:15">027A7055-EBB3-4759-9E69-3F849D76F142</UUID>
+      <TagList></TagList>
+      <MenuItemList membercount="0"></MenuItemList>
+      <Conditions>
+        <Install>
+          <Calculation>
+            <Text>
+              <![CDATA[1]]>
+            </Text>
+          </Calculation>
+        </Install>
+      </Conditions>
+      <Comment></Comment>
+      <Options browseMode="True" findMode="True" previewMode="True">
+        <Override>
+          <Title>
+            <Calculation>
+              <Text>
+                <![CDATA["Selection"]]>
+              </Text>
+            </Calculation>
+          </Title>
+        </Override>
+      </Options>
+    </CustomMenu>
+    <CustomMenu name="agentic-fm — Format" id="40">
+      <UUID modifications="7" userName="Matt" accountName="admin" timestamp="2026-03-06T14:40:55">5EE0BA57-F967-40B0-9B05-A7C515FDC72C</UUID>
+      <SourceUUID>AF47E3FE-BDF6-485A-B182-3CD2B427FAD1</SourceUUID>
+      <TagList></TagList>
+      <MenuItemList membercount="18">
+        <CustomMenuItem hash="0172A47A60953E4CB82045E51A6EF2C0" index="0" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>BA67173F-7A58-447A-AC2D-1B35FA8F2388</UUID>
+          <SourceUUID>C3D4E5F6-A7B8-4C9D-0E1F-2A3B4C5D0003</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.commentLine" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.commentLine"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.commentLine"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Toggle Line Comment"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Shortcut key="47" modifier="6"></Shortcut>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="True"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="88DEE37E09909023D3A91824033C982A" index="1" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>7C2287B7-9B14-43BE-B698-6C4C0436704E</UUID>
+          <SourceUUID>D4E5F6A7-B8C9-4D0E-1F2A-3B4C5D6E0004</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.blockComment" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.blockComment"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.blockComment"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Toggle Block Comment"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="E1ED7FCC514C54B6EFB75DCBA144F8FA" index="2" isSubMenuItem="False" isSeparatorItem="True">
+          <UUID>B603ED9E-F448-4487-AAD6-C2EE9E5A377E</UUID>
+          <SourceUUID>E5F6A7B8-C9D0-4E1F-2A3B-4C5D6E7F0005</SourceUUID>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="A15F328C13B5E46EC5442FC2D00D16D8" index="3" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>61557A8D-52D5-4D05-9920-F37671E6FE9D</UUID>
+          <SourceUUID>F6A7B8C9-D0E1-4F2A-3B4C-5D6E7F8A0006</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.indentLines" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.indentLines"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.indentLines"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Indent Lines"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Shortcut key="93" modifier="4"></Shortcut>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="True"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="E7160710CD4C6D309C4E6B43B02C850B" index="4" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>B88780B7-2BE6-4B54-9C4F-3B359573F733</UUID>
+          <SourceUUID>A7B8C9D0-E1F2-4A3B-4C5D-6E7F8A9B0007</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.outdentLines" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.outdentLines"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.outdentLines"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Outdent Lines"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Shortcut key="91" modifier="4"></Shortcut>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="True"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="61F25F145F631EADD62AF8F6B4F50723" index="5" isSubMenuItem="False" isSeparatorItem="True">
+          <UUID>6F45CCDB-DD57-4363-9DDF-120B958F6C9F</UUID>
+          <SourceUUID>B8C9D0E1-F2A3-4B4C-5D6E-7F8A9B0C0008</SourceUUID>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="32BFB06ED6A7D917C4B9EE84A51AF4B0" index="6" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>D1689F83-1298-4632-BEEB-D982D595A38E</UUID>
+          <SourceUUID>C9D0E1F2-A3B4-4C5D-6E7F-8A9B0C1D0009</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.moveLinesUpAction" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.moveLinesUpAction"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.moveLinesUpAction"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Move Line Up"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Shortcut key="57349" modifier="6"></Shortcut>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="True"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="0D81B115881B6E2E4C068E90EA8C7462" index="7" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>B1F9E6CD-DB8C-4EBB-8CF9-0B4984A9EAE7</UUID>
+          <SourceUUID>D0E1F2A3-B4C5-4D6E-7F8A-9B0C1D2E0010</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.moveLinesDownAction" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.moveLinesDownAction"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.moveLinesDownAction"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Move Line Down"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Shortcut key="57351" modifier="6"></Shortcut>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="True"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="E1BA49557B79766E88156D1444347CEB" index="8" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>E8C4A2BD-F69A-4A7C-9B83-B0A4D1855BA2</UUID>
+          <SourceUUID>E1F2A3B4-C5D6-4E7F-8A9B-0C1D2E3F0011</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.copyLinesUpAction" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.copyLinesUpAction"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.copyLinesUpAction"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Copy Line Up"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Shortcut key="57349" modifier="7"></Shortcut>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="True"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="FB3A521D156C46407C4D3859EDAC9ACA" index="9" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>E90D31B9-DA95-4425-96F1-6E2BCEF4D862</UUID>
+          <SourceUUID>F2A3B4C5-D6E7-4F8A-9B0C-1D2E3F4A0012</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.copyLinesDownAction" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.copyLinesDownAction"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.copyLinesDownAction"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Copy Line Down"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Shortcut key="57351" modifier="7"></Shortcut>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="True"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="EBE03A740D3E193E212B2CE8843B268B" index="10" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>B007F377-CBBE-4C71-B491-86DBE90D0C13</UUID>
+          <SourceUUID>A3B4C5D6-E7F8-4A9B-0C1D-2E3F4A5B0013</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.deleteLines" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.deleteLines"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.deleteLines"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Delete Line"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Shortcut key="75" modifier="5"></Shortcut>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="True"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="D0C9800D3A73A00F2BC48EDC49A7A42D" index="11" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>5EDB5B0E-D019-4129-A4D3-7740AE41A061</UUID>
+          <SourceUUID>B4C5D6E7-F8A9-4B0C-1D2E-3F4A5B6C0014</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.insertLineBefore" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.insertLineBefore"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.insertLineBefore"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Insert Line Above"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="C4FB5230DD104FFF2FC2E21B374A119F" index="12" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>A091B010-E0A6-4AE0-AB55-119B142BDB1A</UUID>
+          <SourceUUID>C5D6E7F8-A9B0-4C1D-2E3F-4A5B6C7D0015</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.insertLineAfter" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.insertLineAfter"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.insertLineAfter"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Insert Line Below"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="DC167880C125FFC8A183999B6EFF9026" index="13" isSubMenuItem="False" isSeparatorItem="True">
+          <UUID>AD9CD882-48BC-4F3B-A39A-D6ECEE38A72A</UUID>
+          <SourceUUID>D6E7F8A9-B0C1-4D2E-3F4A-5B6C7D8E0016</SourceUUID>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="FFFF962C21CB647A932A2F1F565900D0" index="14" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>A8A1B3B9-81C3-48E0-BE64-61911D5CA3C1</UUID>
+          <SourceUUID>E7F8A9B0-C1D2-4E3F-4A5B-6C7D8E9F0017</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.trimTrailingWhitespace" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.trimTrailingWhitespace"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.trimTrailingWhitespace"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Trim Trailing Whitespace"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="29B3BD949A661C736EC7B1B10C0B74FF" index="15" isSubMenuItem="False" isSeparatorItem="True">
+          <UUID>4F3394FC-D3C2-4BE7-BA63-8201DDFD40A8</UUID>
+          <SourceUUID>F8A9B0C1-D2E3-4F4A-5B6C-7D8E9F0A0018</SourceUUID>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="FAAC23937932DAB746F84E006979B569" index="16" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>3DF1467B-2B44-437D-A150-6F990AA7AD61</UUID>
+          <SourceUUID>A9B0C1D2-E3F4-4A5B-6C7D-8E9F0A1B0019</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.transformToUppercase" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.transformToUppercase"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.transformToUppercase"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["To Uppercase"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="9A413693076CE7B710E21B55B7C533EF" index="17" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>6964CE31-43EC-465C-85D4-F11304B39380</UUID>
+          <SourceUUID>B0C1D2E3-F4A5-4B6C-7D8E-9F0A1B2C0020</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.transformToLowercase" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.transformToLowercase"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.transformToLowercase"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["To Lowercase"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="False"></Override>
+        </CustomMenuItem>
+      </MenuItemList>
+      <Conditions>
+        <Install>
+          <Calculation>
+            <Text>
+              <![CDATA[1]]>
+            </Text>
+          </Calculation>
+        </Install>
+      </Conditions>
+      <Comment></Comment>
+      <Options browseMode="True" findMode="True" previewMode="True">
+        <Override>
+          <Title>
+            <Calculation>
+              <Text>
+                <![CDATA["Format"]]>
+              </Text>
+            </Calculation>
+          </Title>
+        </Override>
+      </Options>
+    </CustomMenu>
+    <CustomMenu name="agentic-fm — View" id="43">
+      <UUID modifications="4" userName="Matt" accountName="admin" timestamp="2026-03-06T14:37:22">2B3B661E-0A4D-4513-AD72-C4F29D7BFE2C</UUID>
+      <SourceUUID>3FAF9997-EC42-48D2-85C3-986E1FE331CA</SourceUUID>
+      <TagList></TagList>
+      <MenuItemList membercount="14">
+        <CustomMenuItem hash="50B819B0E4224BBB05E71AACCF39B712" index="0" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>AFAD97D5-87FA-45B6-87F7-4B6AD69903DC</UUID>
+          <SourceUUID>7AFFE1B9-2D99-4360-88D2-E57F8AC11BAA</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "agfm.toggleXmlPreview" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["agfm.toggleXmlPreview"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"agfm.toggleXmlPreview"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["XML Preview"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Shortcut key="88" modifier="5"></Shortcut>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="True"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="0B07A61C461045388A0B440F9A191770" index="1" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>77E05DAB-CAF3-47AD-A2BA-2B9973D14CB1</UUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.toggleWordWrap" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.toggleWordWrap"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.toggleWordWrap"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Word Wrap"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Shortcut key="90" modifier="12"></Shortcut>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="True"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="4C2BE4D5523708236E8BD7CBB90D8B15" index="2" isSubMenuItem="False" isSeparatorItem="True">
+          <UUID>2EACF28B-C082-42A0-8C2D-6A952F0D229D</UUID>
+          <SourceUUID>A0E48F19-9B9A-43AF-8610-812DB3296EEA</SourceUUID>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="9CF7F2BA131D77053F1B8FDBF3FD9917" index="3" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>51B766E9-2974-4E75-8B34-D64FBCC114D3</UUID>
+          <SourceUUID>9D29D293-FC6B-401E-A75B-6DF6510EA30C</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.fontZoomIn" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.fontZoomIn"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.fontZoomIn"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Zoom In"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Shortcut key="61" modifier="4"></Shortcut>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="True"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="9BB55FC6F189268217E8A8DBAF400F1C" index="4" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>E34BA428-71D1-4FC6-9916-14ABC6ED7FF2</UUID>
+          <SourceUUID>1A841B01-0C8F-499A-8BB8-700C4969798B</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.fontZoomOut" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.fontZoomOut"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.fontZoomOut"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Zoom Out"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Shortcut key="45" modifier="4"></Shortcut>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="True"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="367CE2933A63876047DA5CAECFC13877" index="5" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>0013F172-D228-48A6-AEE2-DA900FE6920D</UUID>
+          <SourceUUID>382BA5B2-3CD6-4E78-889C-56496A17F087</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.fontZoomReset" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.fontZoomReset"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.fontZoomReset"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Reset Zoom"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="36E988068A0A46C518087BD0EFC73B9B" index="6" isSubMenuItem="False" isSeparatorItem="True">
+          <UUID>F0981C05-4B9C-4B2F-A287-21BE2684DC08</UUID>
+          <SourceUUID>7AE92D93-786C-4AFF-9009-992931F18704</SourceUUID>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="4E29EB5B05647A8CD82988FB0A1DB5F3" index="7" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>EF7B9064-30C5-4402-99C3-7D6A00F2F616</UUID>
+          <SourceUUID>F71E14BC-DE1D-4922-93C2-5DCF6E9733DC</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.fold" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.fold"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.fold"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Fold Region"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="8134CD7637DE99E36FBC93F60518E526" index="8" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>DD74442F-0E41-4B4C-BF22-1DE986C307DF</UUID>
+          <SourceUUID>2B825D29-F6C0-4D84-8F3D-7443BF69A26E</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.unfold" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.unfold"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.unfold"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Unfold Region"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="240968A0076F9872ADDB070212825946" index="9" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>53C3338D-6635-473D-8150-B36C0E6444F3</UUID>
+          <SourceUUID>D60FCD38-E8A8-413A-87E3-8A827CE3B2A0</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.foldAll" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.foldAll"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.foldAll"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Fold All"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="77535CA4CB1F286E1E27533BC88CE410" index="10" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>1016770D-8FA3-4B20-955B-94652924BA72</UUID>
+          <SourceUUID>7EA792B8-95E4-44C4-B5D8-36A7C600C603</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.unfoldAll" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.unfoldAll"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.unfoldAll"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Unfold All"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="FF7856DC4454F23F0BFC8BA6E875DF77" index="11" isSubMenuItem="False" isSeparatorItem="True">
+          <UUID>579BAAF3-9569-4BA7-B038-DF02F96EF202</UUID>
+          <SourceUUID>CA28EC3B-DE04-4E2F-BE3B-487F2DDD4F9F</SourceUUID>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Override name="False" action="False" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="A019EB5265DC603550ABFB6B3259FB3A" index="12" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>F442EA81-E499-4CC8-8B22-472F86C84D76</UUID>
+          <SourceUUID>CE2875A0-0820-482F-8802-C0697CDC86D2</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.toggleMinimap" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.toggleMinimap"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.toggleMinimap"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Toggle Minimap"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="False"></Override>
+        </CustomMenuItem>
+        <CustomMenuItem hash="9915A83925D09691C98CB61BFE628624" index="13" isSubMenuItem="False" isSeparatorItem="False">
+          <UUID>5A7681D5-4098-4447-ABD1-879BC8D6F097</UUID>
+          <SourceUUID>C16287B4-6A50-4256-BC11-D8A08623B15E</SourceUUID>
+          <action>
+            <Step enable="True" id="1" name="Perform Script">
+              <StepText>Perform Script [ “Agentic-fm Menu”; Parameter: "editor.action.toggleRenderWhitespace" ]</StepText>
+              <CurrentScript value="Pause"></CurrentScript>
+              <Calculation>
+                <![CDATA["editor.action.toggleRenderWhitespace"]]>
+              </Calculation>
+              <DisplayCalculation>
+                <Chunk type="NoRef">"editor.action.toggleRenderWhitespace"</Chunk>
+              </DisplayCalculation>
+              <Script id="271" name="Agentic-fm Menu"></Script>
+            </Step>
+          </action>
+          <Conditions>
+            <Install>
+              <Calculation>
+                <Text>
+                  <![CDATA[1]]>
+                </Text>
+              </Calculation>
+            </Install>
+          </Conditions>
+          <Name>
+            <Calculation>
+              <Text>
+                <![CDATA["Toggle Whitespace"]]>
+              </Text>
+            </Calculation>
+          </Name>
+          <Command id="0"></Command>
+          <Override name="True" action="True" Shortcut="False"></Override>
+        </CustomMenuItem>
+      </MenuItemList>
+      <Conditions>
+        <Install>
+          <Calculation>
+            <Text>
+              <![CDATA[1]]>
+            </Text>
+          </Calculation>
+        </Install>
+      </Conditions>
+      <Comment></Comment>
+      <Options browseMode="True" findMode="True" previewMode="True">
+        <Override>
+          <Title>
+            <Calculation>
+              <Text>
+                <![CDATA["View"]]>
+              </Text>
+            </Calculation>
+          </Title>
+        </Override>
+      </Options>
+    </CustomMenu>
+  </CustomMenuCatalog>
+  <PasteIndexList membercount="5">
+    <Object id="26"></Object>
+    <Object id="27"></Object>
+    <Object id="29"></Object>
+    <Object id="40"></Object>
+    <Object id="43"></Object>
+  </PasteIndexList>
+</FMObjectTransfer>

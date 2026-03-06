@@ -124,6 +124,30 @@ Navigate to the layout you are working on and run the **Push Context** script. A
 
 ---
 
+## Optional: agentic-fm web viewer
+
+The agentic-fm web viewer is a browser-based Monaco editor embedded directly in FileMaker. It provides a three-panel interface — script editor, XML preview, and AI chat — without leaving FileMaker Pro.
+
+### Adding the web viewer to a layout
+
+Add a **WebViewer** object to any layout and set its URL to `http://localhost:8080` (the Vite dev server). Name the object exactly **`agentic-fm`** — this name is required for the bridge script and custom menu integration to work correctly.
+
+The web viewer works on any layout, but a **dedicated layout** is strongly recommended:
+
+- Place only the web viewer object on the layout with no other interactive objects
+- Make the layout window **resizable** so you can expand the editor to a comfortable size
+- A single-object layout ensures the custom menu set (assigned per-layout) applies consistently whenever the editor is in use
+
+See `webviewer/WEBVIEWER_INTEGRATION.md` for full setup and development workflow details.
+
+### Custom menu integration (optional)
+
+The `filemaker/custom_menu/` folder contains an optional custom menu set that adds five editor-aware menus to the layout hosting the web viewer. These menus expose keyboard shortcuts for common Monaco editor actions (comment toggle, indent, move line, find, and more) without requiring the developer to remember key bindings.
+
+See `filemaker/custom_menu/README.md` for the integration steps.
+
+---
+
 ## Dependency Summary
 
 | Dependency | Required By | Where to Get |
