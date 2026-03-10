@@ -5,3 +5,61 @@ html, body, #app {
   margin: 0;
   padding: 0;
 }
+
+/* Light UI theme — remaps the neutral palette so all Tailwind neutral-* classes flip.
+   Backgrounds (neutral-700/800/900) become light grays; text (neutral-200/300/400) becomes dark. */
+[data-ui-theme="light"] {
+  --color-neutral-700: oklch(87% 0 0);
+  --color-neutral-600: oklch(79% 0 0);
+  --color-neutral-500: oklch(52% 0 0);
+  --color-neutral-400: oklch(40% 0 0);
+  --color-neutral-300: oklch(26% 0 0);
+  --color-neutral-200: oklch(14% 0 0);
+}
+
+/* Scrollbar thumb needs to be dark-on-light in light theme */
+[data-ui-theme="light"] *:not(.monaco-editor):not(.monaco-editor *)::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.18);
+  background-clip: content-box;
+  border: 2px solid transparent;
+  border-radius: 6px;
+}
+
+[data-ui-theme="light"] *:not(.monaco-editor):not(.monaco-editor *)::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.38);
+  background-clip: content-box;
+}
+
+/* Scrollbars styled to match Monaco/VS Code — thin, semi-transparent thumb, no track.
+   Monaco elements are excluded: Monaco measures native scrollbar width internally and
+   renders its own DOM-based scrollbar, so our CSS must not interfere with it. */
+*:not(.monaco-editor):not(.monaco-editor *)::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background: transparent;
+}
+
+*:not(.monaco-editor):not(.monaco-editor *)::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*:not(.monaco-editor):not(.monaco-editor *)::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+
+*:not(.monaco-editor):not(.monaco-editor *)::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+*:not(.monaco-editor):not(.monaco-editor *)::-webkit-scrollbar-thumb {
+  background: rgba(121, 121, 121, 0.18);
+  background-clip: content-box;
+  border: 2px solid transparent;
+  border-radius: 6px;
+}
+
+*:not(.monaco-editor):not(.monaco-editor *)::-webkit-scrollbar-thumb:hover {
+  background: rgba(121, 121, 121, 0.45);
+  background-clip: content-box;
+}
+

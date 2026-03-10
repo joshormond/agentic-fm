@@ -4,6 +4,7 @@ import { listProviders, getProvider } from '../providers/registry';
 import { fetchSettings, saveSettings } from '@/api/client';
 import {
   THEME_PRESETS,
+  LIGHT_PRESETS,
   loadSavedPresetId,
   loadSavedCustomColors,
   saveTheme,
@@ -13,6 +14,7 @@ import { importVSCodeTheme, importMonacoTheme } from '@/editor/language/theme-im
 
 interface AISettingsProps {
   onClose: () => void;
+  onPresetChange?: (presetId: string) => void;
 }
 
 const COLOR_FIELDS: Array<{ key: keyof ThemeColors; label: string; mbsVar: string }> = [
@@ -30,7 +32,7 @@ const COLOR_FIELDS: Array<{ key: keyof ThemeColors; label: string; mbsVar: strin
   { key: 'brackets', label: 'Brackets', mbsVar: '$brackets' },
 ];
 
-export function AISettings({ onClose }: AISettingsProps) {
+export function AISettings({ onClose, onPresetChange }: AISettingsProps) {
   const providers = listProviders();
   const [providerId, setProviderId] = useState('anthropic');
   const [model, setModel] = useState('');
@@ -101,6 +103,7 @@ export function AISettings({ onClose }: AISettingsProps) {
     setPresetId(id);
     setCustomColors({});
     saveTheme(monaco, id, {});
+    onPresetChange?.(id);
   };
 
   const handleColorChange = (key: keyof ThemeColors, value: string) => {

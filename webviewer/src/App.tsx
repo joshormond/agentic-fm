@@ -13,19 +13,73 @@ import type { StepInfo } from '@/api/client';
 import type { StepCatalogEntry } from '@/converter/catalog-types';
 import { hrToXml, loadCatalog } from '@/converter/hr-to-xml';
 import { saveDraft, restoreDraft } from '@/autosave';
-import { loadEditorMode, saveEditorMode } from '@/editor/language/themes';
+import { loadEditorMode, saveEditorMode, loadSavedPresetId, LIGHT_PRESETS, getThemeBackgrounds } from '@/editor/language/themes';
+import { loadLayoutPrefsSync, saveLayoutPrefs, loadLayoutPrefsFromServer, hasLocalPrefs } from '@/layout-prefs';
+
+function useSplitPane(defaultPct = 50, min = 20, max = 80, direction: 'horizontal' | 'vertical' = 'horizontal') {
+  const [pct, setPct] = useState(defaultPct);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const onDividerMouseDown = useCallback((e: MouseEvent) => {
+    e.preventDefault();
+    const container = containerRef.current;
+    if (!container) return;
+
+    const move = (me: MouseEvent) => {
+      const rect = container.getBoundingClientRect();
+      const newPct = direction === 'vertical'
+        ? ((me.clientY - rect.top) / rect.height) * 100
+        : ((me.clientX - rect.left) / rect.width) * 100;
+      setPct(Math.min(max, Math.max(min, newPct)));
+    };
+    const up = () => {
+      window.removeEventListener('mousemove', move);
+      window.removeEventListener('mouseup', up);
+    };
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', up);
+  }, [min, max, direction]);
+
+  return { pct, setPct, containerRef, onDividerMouseDown };
+}
+
+function useResizablePanel(defaultWidth: number, min: number, max: number) {
+  const [width, setWidth] = useState(defaultWidth);
+
+  const onDividerMouseDown = useCallback((e: MouseEvent) => {
+    e.preventDefault();
+    const startX = e.clientX;
+    const startWidth = width;
+
+    const move = (me: MouseEvent) => {
+      const delta = me.clientX - startX;
+      setWidth(Math.min(max, Math.max(min, startWidth + delta)));
+    };
+    const up = () => {
+      window.removeEventListener('mousemove', move);
+      window.removeEventListener('mouseup', up);
+    };
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', up);
+  }, [width, min, max]);
+
+  return { width, setWidth, onDividerMouseDown };
+}
 
 export function App() {
+  // Load layout prefs once on mount — localStorage is sync so no flash
+  const [initialPrefs] = useState(loadLayoutPrefsSync);
+
   const [context, setContext] = useState<FMContext | null>(null);
   const [generatedAt, setGeneratedAt] = useState<string | undefined>(undefined);
   const [status, setStatus] = useState('Ready');
   const [editorContent, setEditorContent] = useState(sampleScript);
   const [scriptName, setScriptName] = useState('');
-  const [showXmlPreview, setShowXmlPreview] = useState(false);
-  const [showChat, setShowChat] = useState(false);
+  const [showXmlPreview, setShowXmlPreview] = useState(initialPrefs.showXmlPreview);
+  const [showChat, setShowChat] = useState(initialPrefs.showChat);
   const [showSettings, setShowSettings] = useState(false);
   const [showLoadScript, setShowLoadScript] = useState(false);
-  const [showLibrary, setShowLibrary] = useState(false);
+  const [showLibrary, setShowLibrary] = useState(initialPrefs.showLibrary);
   const [steps, setSteps] = useState<StepInfo[]>([]);
   const [catalog, setCatalog] = useState<StepCatalogEntry[]>([]);
   const [promptMarker, setPromptMarker] = useState('prompt');
@@ -33,8 +87,14 @@ export function App() {
   const [knowledgeDocs, setKnowledgeDocs] = useState('');
   const [chatKey, setChatKey] = useState(0);
   const [editorMode, setEditorMode] = useState<'script' | 'calc'>(loadEditorMode);
+  const [presetId, setPresetId] = useState(() => loadSavedPresetId());
+  const isLightTheme = LIGHT_PRESETS.has(presetId);
+  const themeBg = getThemeBackgrounds(presetId);
   const scriptNameRef = useRef('');
   const editorContentRef = useRef(editorContent);
+  const mainSplit = useSplitPane(initialPrefs.editorPct);
+  const editorXmlSplit = useSplitPane(initialPrefs.editorXmlPct, 15, 85, 'vertical');
+  const library = useResizablePanel(initialPrefs.libraryWidth, 140, 480);
 
   // Keep refs in sync so callbacks always have the latest values
   scriptNameRef.current = scriptName;
@@ -78,6 +138,32 @@ export function App() {
   useEffect(() => {
     saveDraft(editorContent, scriptNameRef.current);
   }, [editorContent]);
+
+  // Persist layout prefs whenever any panel visibility or size changes
+  useEffect(() => {
+    saveLayoutPrefs({
+      showXmlPreview,
+      showChat,
+      showLibrary,
+      editorPct: mainSplit.pct,
+      editorXmlPct: editorXmlSplit.pct,
+      libraryWidth: library.width,
+    });
+  }, [showXmlPreview, showChat, showLibrary, mainSplit.pct, editorXmlSplit.pct, library.width]);
+
+  // Server fallback: restore layout prefs when localStorage has no saved state
+  useEffect(() => {
+    if (hasLocalPrefs()) return;
+    loadLayoutPrefsFromServer().then(prefs => {
+      if (!prefs) return;
+      setShowXmlPreview(prefs.showXmlPreview);
+      setShowChat(prefs.showChat);
+      setShowLibrary(prefs.showLibrary);
+      mainSplit.setPct(prefs.editorPct);
+      editorXmlSplit.setPct(prefs.editorXmlPct);
+      library.setWidth(prefs.libraryWidth);
+    });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Expose global callbacks for FileMaker JS bridge
   useEffect(() => {
@@ -165,12 +251,13 @@ export function App() {
     setStatus('Script inserted from AI');
   }, []);
 
+  const [showInsertWarning, setShowInsertWarning] = useState(false);
+
   const handleLibraryInsert = useCallback((content: string) => {
-    setEditorContent(prev => {
-      const trimmed = prev.trimEnd();
-      return trimmed ? `${trimmed}\n\n${content}` : content;
-    });
-    setStatus('Inserted from library');
+    const inserted = (window as any).insertAtEditorCursor?.(content) ?? false;
+    if (!inserted) {
+      setShowInsertWarning(true);
+    }
   }, []);
 
   const handleScriptLoaded = useCallback((hr: string, name: string, options: { resetChat: boolean }) => {
@@ -197,7 +284,11 @@ export function App() {
   }, [handleNewScript, handleValidate, handleClipboard]);
 
   return (
-    <div class="flex flex-col h-full">
+    <div
+      class="flex flex-col h-full"
+      data-ui-theme={isLightTheme ? 'light' : 'dark'}
+      style={{ '--color-neutral-900': themeBg.panel, '--color-neutral-800': themeBg.chrome } as any}
+    >
       <Toolbar
         context={context}
         showXmlPreview={showXmlPreview}
@@ -212,7 +303,6 @@ export function App() {
             setStatus('Failed to refresh context');
           });
         }}
-        onClearChat={() => setChatKey(k => k + 1)}
         onNewScript={handleNewScript}
         onValidate={handleValidate}
         onClipboard={handleClipboard}
@@ -222,33 +312,68 @@ export function App() {
       />
       <div class="flex-1 min-h-0 flex">
         {showLibrary && (
-          <div class="w-56 shrink-0 h-full border-r border-neutral-700">
-            <LibraryPanel
-              onInsert={handleLibraryInsert}
-              getEditorContent={() => editorContentRef.current}
+          <>
+            <div style={{ width: library.width, flexShrink: 0 }} class="h-full min-w-0 overflow-hidden">
+              <LibraryPanel
+                onInsert={handleLibraryInsert}
+                onStatus={setStatus}
+                getEditorContent={() => editorContentRef.current}
+                getEditorSelection={() => (window as any).getEditorSelection?.() ?? null}
+              />
+            </div>
+            <div
+              class="w-1 shrink-0 h-full bg-neutral-700 hover:bg-blue-500 cursor-col-resize transition-colors"
+              onMouseDown={library.onDividerMouseDown}
             />
-          </div>
+          </>
         )}
-        <div class={`${showXmlPreview || showChat ? 'w-1/2' : 'flex-1'} min-w-0 h-full`}>
-          <EditorPanel
-            value={editorContent}
-            onChange={setEditorContent}
-            context={context}
-          />
-        </div>
-        {showXmlPreview && !showChat && (
-          <div class="w-1/2 min-w-0 h-full">
-            <XmlPreview hrText={editorContent} context={context} />
-          </div>
-        )}
-        {showChat && (
-          <div class={showXmlPreview ? 'w-1/2 min-w-0 h-full flex' : 'w-1/2 min-w-0 h-full'}>
+        {/* Main resizable area: left column | chat */}
+        <div ref={mainSplit.containerRef} class="flex-1 min-h-0 h-full flex">
+          {/* Left column: editor stacked above optional XML preview */}
+          <div
+            ref={editorXmlSplit.containerRef}
+            style={showChat ? { flexBasis: `${mainSplit.pct}%`, flexShrink: 0, flexGrow: 0, minWidth: 0 } : undefined}
+            class={`${showChat ? '' : 'flex-1'} h-full min-w-0 flex flex-col`}
+          >
+            {/* Editor */}
+            <div
+              style={showXmlPreview ? { flexBasis: `${editorXmlSplit.pct}%`, flexShrink: 0, flexGrow: 0, minHeight: 0 } : undefined}
+              class={`${showXmlPreview ? '' : 'flex-1'} w-full min-h-0`}
+            >
+              <EditorPanel
+                value={editorContent}
+                onChange={setEditorContent}
+                context={context}
+              />
+            </div>
+
+            {/* Horizontal divider between editor and XML preview */}
             {showXmlPreview && (
-              <div class="w-1/2 min-w-0 h-full">
+              <div
+                class="h-1 shrink-0 w-full bg-neutral-700 hover:bg-blue-500 cursor-row-resize transition-colors"
+                onMouseDown={editorXmlSplit.onDividerMouseDown}
+              />
+            )}
+
+            {/* XML preview below editor */}
+            {showXmlPreview && (
+              <div class="flex-1 w-full min-h-0">
                 <XmlPreview hrText={editorContent} context={context} />
               </div>
             )}
-            <div class={showXmlPreview ? 'w-1/2 min-w-0 h-full' : 'w-full h-full'}>
+          </div>
+
+          {/* Vertical divider between left column and chat */}
+          {showChat && (
+            <div
+              class="w-1 shrink-0 h-full bg-neutral-700 hover:bg-blue-500 cursor-col-resize transition-colors"
+              onMouseDown={mainSplit.onDividerMouseDown}
+            />
+          )}
+
+          {/* Chat panel */}
+          {showChat && (
+            <div class="flex-1 min-w-0 h-full">
               <ChatPanel
                 key={chatKey}
                 context={context}
@@ -259,10 +384,11 @@ export function App() {
                 codingConventions={codingConventions}
                 knowledgeDocs={knowledgeDocs}
                 onInsertScript={handleInsertScript}
+                onClearChat={() => setChatKey(k => k + 1)}
               />
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
       <StatusBar
         status={status}
@@ -271,7 +397,7 @@ export function App() {
         generatedAt={generatedAt}
       />
 
-      {showSettings && <AISettings onClose={() => setShowSettings(false)} />}
+      {showSettings && <AISettings onClose={() => setShowSettings(false)} onPresetChange={setPresetId} />}
       {showLoadScript && (
         <LoadScriptDialog
           context={context}
@@ -280,6 +406,33 @@ export function App() {
           onContextUpdate={setContext}
           onClose={() => setShowLoadScript(false)}
         />
+      )}
+
+      {showInsertWarning && (
+        <div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div class="bg-neutral-800 rounded-lg shadow-xl w-80 max-w-[90vw]">
+            <div class="flex items-center justify-between px-4 py-3 border-b border-neutral-700">
+              <h2 class="text-sm font-semibold text-neutral-200">No cursor position</h2>
+              <button
+                onClick={() => setShowInsertWarning(false)}
+                class="text-neutral-400 hover:text-neutral-200 text-lg leading-none"
+              >
+                &times;
+              </button>
+            </div>
+            <div class="px-4 py-4 text-xs text-neutral-300 leading-relaxed">
+              Click inside the editor first to establish a cursor position, then insert from the library.
+            </div>
+            <div class="flex justify-end px-4 py-3 border-t border-neutral-700">
+              <button
+                onClick={() => setShowInsertWarning(false)}
+                class="px-3 py-1 rounded text-xs bg-blue-700 hover:bg-blue-600 text-white transition-colors"
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

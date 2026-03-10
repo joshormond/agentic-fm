@@ -307,6 +307,32 @@ export function apiMiddleware(): Plugin {
           return;
         }
 
+        // --- GET/POST /api/layout-prefs ---
+        if (pathname === '/api/layout-prefs') {
+          const prefsPath = path.join(agent, 'sandbox', '.layout-prefs.json');
+
+          if (req.method === 'GET') {
+            try {
+              const data = fs.readFileSync(prefsPath, 'utf-8');
+              res.setHeader('Content-Type', 'application/json');
+              res.end(data);
+            } catch {
+              res.statusCode = 404;
+              res.end(JSON.stringify({ error: 'No layout prefs found' }));
+            }
+            return;
+          }
+
+          if (req.method === 'POST') {
+            const body = await readBody(req);
+            fs.mkdirSync(path.dirname(prefsPath), { recursive: true });
+            fs.writeFileSync(prefsPath, body, 'utf-8');
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ ok: true }));
+            return;
+          }
+        }
+
         // --- GET/POST/DELETE /api/autosave ---
         if (pathname === '/api/autosave') {
           const autosavePath = path.join(agent, 'sandbox', '.autosave.json');

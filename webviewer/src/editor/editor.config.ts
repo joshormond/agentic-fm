@@ -19,6 +19,13 @@ export const editorConfig: monaco.editor.IStandaloneEditorConstructionOptions = 
     bracketPairs: false,
   },
   padding: { top: 8, bottom: 8 },
+  scrollbar: {
+    vertical: 'visible',
+    horizontal: 'visible',
+    verticalScrollbarSize: 8,
+    horizontalScrollbarSize: 8,
+    useShadows: false,
+  },
   quickSuggestions: { other: true, comments: false, strings: true },
   suggestOnTriggerCharacters: true,
 };

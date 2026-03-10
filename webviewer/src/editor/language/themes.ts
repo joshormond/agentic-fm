@@ -159,7 +159,16 @@ export function buildMonacoTheme(colors: ThemeColors, isLight = false): monaco.e
   };
 }
 
-const LIGHT_PRESETS = new Set(['solarized_light']);
+export const LIGHT_PRESETS = new Set(['solarized_light']);
+
+/** Returns the panel body and chrome (toolbar/header) background colours for a preset,
+ *  matching the exact values Monaco uses for editor.background. */
+export function getThemeBackgrounds(presetId: string): { panel: string; chrome: string } {
+  if (LIGHT_PRESETS.has(presetId)) {
+    return { panel: '#FDF6E3', chrome: '#EEE8D5' };
+  }
+  return { panel: '#1E1E1E', chrome: '#252526' };
+}
 
 export function loadSavedTheme(): ThemeColors {
   try {

@@ -11,7 +11,7 @@ export function XmlPreview({ hrText, context }: XmlPreviewProps) {
   const result = useMemo(() => hrToXml(hrText, context), [hrText, context]);
 
   return (
-    <div class="flex flex-col h-full bg-neutral-900 border-l border-neutral-700">
+    <div class="flex flex-col h-full bg-neutral-900 border-t border-neutral-700">
       <div class="flex items-center justify-between px-3 py-1 bg-neutral-800 text-xs text-neutral-400 border-b border-neutral-700">
         <span>XML Preview</span>
         {result.errors.length > 0 && (

@@ -29,6 +29,7 @@ export function EditorPanel({ value, onChange, context }: EditorPanelProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
   const completionDisposable = useRef<monaco.IDisposable | null>(null);
+  const lastSelectionRef = useRef<monaco.Selection | null>(null);
   const [catalog, setCatalog] = useState<StepCatalogEntry[]>([]);
 
   // Register language once (no catalog dependency)
@@ -75,6 +76,27 @@ export function EditorPanel({ value, onChange, context }: EditorPanelProps) {
       editor.trigger('fm', actionId, null);
     };
 
+    // Track last known cursor position so inserts work even after focus leaves the editor
+    editor.onDidChangeCursorSelection(e => {
+      lastSelectionRef.current = e.selection;
+    });
+
+    // Expose selection accessor for LibraryPanel
+    (window as any).getEditorSelection = (): string | null => {
+      const selection = editor.getSelection();
+      if (!selection || selection.isEmpty()) return null;
+      return editor.getModel()?.getValueInRange(selection) ?? null;
+    };
+
+    // Insert text at last known cursor position; returns false only if editor was never used
+    (window as any).insertAtEditorCursor = (text: string): boolean => {
+      const selection = lastSelectionRef.current ?? editor.getSelection();
+      if (!selection) return false;
+      editor.executeEdits('library-insert', [{ range: selection, text, forceMoveMarkers: true }]);
+      editor.focus();
+      return true;
+    };
+
     // Listen for changes — debounced to avoid re-rendering App on every keystroke
     let changeTimer: ReturnType<typeof setTimeout> | undefined;
     editor.onDidChangeModelContent(() => {
@@ -88,6 +110,8 @@ export function EditorPanel({ value, onChange, context }: EditorPanelProps) {
     return () => {
       if (changeTimer) clearTimeout(changeTimer);
       delete (window as any).triggerEditorAction;
+      delete (window as any).getEditorSelection;
+      delete (window as any).insertAtEditorCursor;
       diagDisposable.dispose();
       editor.dispose();
       editorRef.current = null;
