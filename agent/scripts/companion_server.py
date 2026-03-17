@@ -284,9 +284,10 @@ class CompanionHandler(BaseHTTPRequestHandler):
             return
         target = payload.get("target", "")
         auto_save = bool(payload.get("auto_save", False))
+        select_all = bool(payload.get("select_all", True))
         with _pending_lock:
-            _pending_job = {"target": target, "auto_save": auto_save}
-        log.info("Pending job set: target=%r auto_save=%s", target, auto_save)
+            _pending_job = {"target": target, "auto_save": auto_save, "select_all": select_all}
+        log.info("Pending job set: target=%r auto_save=%s select_all=%s", target, auto_save, select_all)
         self._send_json({"success": True})
 
     def _handle_trigger(self):
@@ -307,18 +308,17 @@ class CompanionHandler(BaseHTTPRequestHandler):
         script = payload.get("script", "")
         parameter = payload.get("parameter", "")
 
-        if not script:
-            self._send_json({"success": False, "error": "Missing required field: script"}, status=400)
-            return
-
         def as_str(s):
             """Escape double-quotes for use inside an AppleScript double-quoted string."""
             return s.replace("\\", "\\\\").replace('"', '\\"')
 
-        # raw_applescript overrides script/parameter — used for testing and Tier 3
+        # raw_applescript bypasses the FM do script path — no script name required
         raw = payload.get("raw_applescript", "")
         if raw:
             applescript = raw
+        elif not script:
+            self._send_json({"success": False, "error": "Missing required field: script"}, status=400)
+            return
         else:
             # Store the target and auto_save flag in the pending slot so the
             # FM script can retrieve them via GET /pending (AppleScript parameter
@@ -326,9 +326,10 @@ class CompanionHandler(BaseHTTPRequestHandler):
             if parameter:
                 global _pending_job
                 auto_save = bool(payload.get("auto_save", False))
+                select_all = bool(payload.get("select_all", True))
                 with _pending_lock:
-                    _pending_job = {"target": parameter, "auto_save": auto_save}
-                log.info("Pending job set: target=%r auto_save=%s", parameter, auto_save)
+                    _pending_job = {"target": parameter, "auto_save": auto_save, "select_all": select_all}
+                log.info("Pending job set: target=%r auto_save=%s select_all=%s", parameter, auto_save, select_all)
 
             applescript = (
                 f'tell application "{as_str(fm_app)}"\n'

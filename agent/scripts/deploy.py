@@ -121,6 +121,7 @@ def _tier2(
     fm_app_name: str,
     target_script: str | None,
     auto_save: bool = False,
+    select_all: bool = True,
 ) -> dict:
     """Load clipboard then trigger FM Pro to run Agentic-fm Paste via AppleScript."""
     # Step 1: load clipboard
@@ -149,6 +150,7 @@ def _tier2(
             "script": "Agentic-fm Paste",
             "parameter": target_script,
             "auto_save": auto_save,
+            "select_all": select_all,
         },
     )
     if not trigger_result.get("success"):
@@ -166,10 +168,11 @@ def _tier2(
             ),
         }
 
+    mode = "replaced" if select_all else "appended to"
     return {
         "success": True,
         "tier_used": 2,
-        "message": f"Script pasted into '{target_script}' via MBS.",
+        "message": f"Script steps {mode} '{target_script}' via MBS.",
     }
 
 
@@ -184,21 +187,85 @@ def _tier3(
     target_script: str | None,
     auto_save: bool = False,
 ) -> dict:
-    """Create a script placeholder via AppleScript, then Tier 2 paste."""
+    """Create and name a script placeholder via AppleScript, then paste inline.
+
+    Loads XML to clipboard first, then runs a raw AppleScript on the host
+    (synchronous — waits for completion):
+      1. Open Script Workspace if not already open
+      2. Cmd+N  → creates "New Script"
+      3. Scripts menu → Rename Script → type target name → Return
+      4. Cmd+S  → save (required before do script, or FM blocks with dialog)
+      5. Cmd+A  → select all steps
+      6. Cmd+V  → paste from clipboard (already loaded in step 0)
+      7. Cmd+S  → save after paste (always — new scripts are always saved)
+
+    Notes:
+      - tell application uses fm_app_name (versioned, with em dash)
+      - tell process uses the base name only ("FileMaker Pro") — System Events
+        process names never include the version suffix
+      - raw_applescript is synchronous; clipboard must be loaded before firing
+      - paste is done inline via System Events Cmd+V, not via Agentic-fm Paste
+    """
     if not target_script:
         return _tier2(xml, companion_url, fm_app_name, target_script, auto_save)
 
-    # Trigger FM Pro to run AGFMNewScript, which creates a blank placeholder
+    # Step 0: load clipboard before firing the AppleScript
+    clip_result = _post_json(f"{companion_url}/clipboard", {"xml": xml})
+    if not clip_result.get("success"):
+        return {
+            "success": False,
+            "tier_used": 3,
+            "error": clip_result.get("error", "Clipboard write failed"),
+        }
+
+    def _esc(s: str) -> str:
+        """Escape a string for embedding inside an AppleScript double-quoted string."""
+        return s.replace("\\", "\\\\").replace('"', '\\"')
+
+    # System Events process name — always the base app name without version suffix.
+    # "FileMaker Pro — 22.0.4.406" → "FileMaker Pro"
+    fm_process = fm_app_name.split(" \u2014 ")[0].strip()
+
+    applescript = (
+        f'tell application "{_esc(fm_app_name)}"\n'
+        f'    activate\n'
+        f'end tell\n'
+        f'\n'
+        f'delay 0.5\n'
+        f'\n'
+        f'tell application "System Events"\n'
+        f'    tell process "{_esc(fm_process)}"\n'
+        f'        try\n'
+        f'            click menu item "Script Workspace..." of menu "Scripts" of menu bar 1\n'
+        f'            delay 1.0\n'
+        f'        end try\n'
+        f'        keystroke "n" using {{command down}}\n'
+        f'        delay 0.5\n'
+        f'        click menu item "Rename Script" of menu "Scripts" of menu bar 1\n'
+        f'        delay 1.0\n'
+        f'        keystroke "{_esc(target_script)}"\n'
+        f'        delay 0.2\n'
+        f'        key code 36\n'
+        f'        delay 0.5\n'
+        f'        keystroke "s" using {{command down}}\n'
+        f'        delay 0.3\n'
+        f'        keystroke "a" using {{command down}}\n'
+        f'        delay 0.2\n'
+        f'        keystroke "v" using {{command down}}\n'
+        f'        delay 0.5\n'
+        f'        keystroke "s" using {{command down}}\n'
+        f'        delay 0.3\n'
+        f'    end tell\n'
+        f'end tell\n'
+    )
+
     create_result = _post_json(
         f"{companion_url}/trigger",
-        {
-            "fm_app_name": fm_app_name,
-            "script": "AGFMNewScript",
-            "parameter": target_script,
-        },
+        {"raw_applescript": applescript},
     )
     if not create_result.get("success"):
         # Script creation failed — fall through to Tier 2 (paste into existing)
+        # Clipboard is already loaded so Tier 2 can skip the clipboard step.
         tier2_result = _tier2(xml, companion_url, fm_app_name, target_script, auto_save)
         return {
             **tier2_result,
@@ -206,7 +273,11 @@ def _tier3(
             "fallback_reason": create_result.get("error", "Script creation failed"),
         }
 
-    return _tier2(xml, companion_url, fm_app_name, target_script, auto_save)
+    return {
+        "success": True,
+        "tier_used": 3,
+        "message": f"Script '{target_script}' created, steps pasted, and saved via Tier 3.",
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -218,6 +289,7 @@ def deploy(
     target_script: str | None = None,
     tier: int | None = None,
     auto_save: bool | None = None,
+    select_all: bool = True,
 ) -> dict:
     """
     Deploy a validated fmxmlsnippet XML file to FileMaker.
@@ -248,7 +320,7 @@ def deploy(
     if effective_tier == 3:
         return _tier3(xml, companion_url, fm_app_name, target_script, effective_auto_save)
     elif effective_tier == 2:
-        return _tier2(xml, companion_url, fm_app_name, target_script, effective_auto_save)
+        return _tier2(xml, companion_url, fm_app_name, target_script, effective_auto_save, select_all)
     else:
         return _tier1(xml, companion_url, target_script)
 
@@ -278,9 +350,41 @@ def main():
         "--no-auto-save", action="store_false", dest="auto_save",
         help="Do not auto-save after paste (overrides config)"
     )
+    paste_group = parser.add_mutually_exclusive_group()
+    paste_group.add_argument(
+        "--replace", action="store_true", default=False,
+        help="Replace all existing steps without prompting (Tier 2 only)"
+    )
+    paste_group.add_argument(
+        "--append", action="store_true", default=False,
+        help="Append after existing steps without prompting (Tier 2 only)"
+    )
     args = parser.parse_args()
 
-    result = deploy(args.xml_path, args.target_script, args.tier, args.auto_save)
+    # Tier 2 targeting an existing script is destructive — always confirm unless
+    # --replace or --append bypasses the prompt explicitly.
+    select_all = True
+    effective_tier = args.tier or _load_config().get("default_tier", 1)
+    if effective_tier == 2 and args.target_script:
+        if args.append:
+            select_all = False
+        elif not args.replace:
+            print(f"\nScript '{args.target_script}' will be modified.")
+            print("  [r] Replace — select all existing steps and paste (destructive)")
+            print("  [a] Append  — paste after existing steps")
+            print("  [c] Cancel")
+            try:
+                choice = input("Choice [r/a/c]: ").strip().lower()
+            except (KeyboardInterrupt, EOFError):
+                print("\nCancelled.")
+                sys.exit(0)
+            if choice == "c":
+                print("Cancelled.")
+                sys.exit(0)
+            elif choice == "a":
+                select_all = False
+
+    result = deploy(args.xml_path, args.target_script, args.tier, args.auto_save, select_all)
 
     # Human-friendly output
     if result.get("instructions"):
