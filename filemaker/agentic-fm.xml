@@ -1454,11 +1454,11 @@
       </Script>
       <Script includeInMenu="False" SiriShortcutVisible="False" runFullAccess="False" id="291" name="Agentic-fm Paste">
         <Step enable="True" id="89" name="# (comment)">
-          <Text>PURPOSE: MBS-powered paste into Script Workspace. Used by Tier 2/3 deployment via companion /trigger.</Text>
+          <Text>PURPOSE: Open a script tab in Script Workspace. Used by Tier 2 deployment via companion /trigger.</Text>
         </Step>
         <Step enable="False" id="61" name="Insert Text">
           <SelectAll state="False"/>
-          <Text>CALLED BY: companion server /trigger endpoint via AppleScript&#xD;  The companion sets the job via POST /pending before firing do script.&#xD;  This script GETs /pending to retrieve: target (script name), auto_save (bool), select_all (bool).&#xD;&#xD;PARAMETERS (from /pending JSON):&#xD;  target      &#x2014; name of the script to paste into&#xD;  auto_save   &#x2014; if true, saves all scripts after paste&#xD;  select_all  &#x2014; if true (default), runs Select All before paste (replaces all steps)&#xD;               if false, pastes after existing steps (append mode)&#xD;&#xD;RETURNS: JSON { success, script, auto_save, select_all } or { success, error }&#xD;&#xD;REQUIRES: MBS Plugin with ScriptWorkspace and Menubar functions&#xD;&#xD;WARNING: FileMaker will block script execution with a dialog if any scripts have&#xD;  unsaved changes. Ensure Agentic-fm Paste itself is saved before running deployments.&#xD;  auto_save uses "Save All Scripts" which saves all open scripts in the workspace.&#xD;&#xD;NOTE: Replace sequence is Cmd+A &#x2192; Delete (key code 51) &#x2192; Cmd+V.&#xD;  The Script Workspace does NOT overwrite a selection on paste &#x2014; selected steps&#xD;  must be explicitly deleted before pasting or the new steps are appended.&#xD;  System Events keystrokes are used (not MBS Menubar commands) because MBS&#xD;  commands are panel-focus-sensitive and unreliable in the Script Workspace.&#xD;&#xD;DIAGNOSTIC: If you hear a system beep after a deploy with auto_save enabled,&#xD;  the paste likely failed &#x2014; Cmd+S beeps when the script has no unsaved changes.</Text>
+          <Text>CALLED BY: companion server /trigger endpoint via AppleScript&#xD;  The companion sets the job via POST /pending before firing do script.&#xD;  This script GETs /pending to retrieve: target (script name).&#xD;&#xD;PARAMETERS (from /pending JSON):&#xD;  target &#x2014; name of the script to open in Script Workspace&#xD;&#xD;RETURNS: JSON { success, script } or { success, error }&#xD;&#xD;REQUIRES: MBS Plugin with ScriptWorkspace functions&#xD;&#xD;NOTE: This script only OPENS the target script tab. The actual paste&#xD;  (AXPress tab focus + Cmd+A + Delete + Cmd+V + Cmd+S) is handled by&#xD;  deploy.py via a second raw_applescript call through the companion.&#xD;  AXPress must run from outside FM &#x2014; Perform AppleScript within FM&#xD;  causes Script Workspace to lose focus on the step editor.</Text>
           <Field>$README</Field>
         </Step>
         <Step enable="True" id="89" name="# (comment)"/>
@@ -1480,19 +1480,6 @@
           </Value>
           <Name>$target</Name>
         </Step>
-        <Step enable="True" id="141" name="Set Variable">
-          <Value>
-            <Calculation><![CDATA[JSONGetElement ( $pendingJSON ; "auto_save" )]]></Calculation>
-          </Value>
-          <Name>$autoSave</Name>
-        </Step>
-        <Step enable="True" id="141" name="Set Variable">
-          <Value>
-            <Calculation><![CDATA[If ( JSONGetElementType ( $pendingJSON ; "select_all" ) = JSONBoolean
-	and JSONGetElement ( $pendingJSON ; "select_all" ) = False ; False ; True )]]></Calculation>
-          </Value>
-          <Name>$selectAll</Name>
-        </Step>
         <Step enable="True" id="68" name="If">
           <Restore state="False"/>
           <Calculation><![CDATA[IsEmpty ( $target )]]></Calculation>
@@ -1505,12 +1492,11 @@
         </Step>
         <Step enable="True" id="70" name="End If"/>
         <Step enable="True" id="89" name="# (comment)">
-          <Text>Bring FM to front before opening Script Workspace &#x2014; MBS and Open Script Workspace require FM to be frontmost</Text>
+          <Text>Bring FM to front before opening Script Workspace</Text>
         </Step>
         <Step enable="True" id="67" name="Perform AppleScript">
           <ContentType value="Text"/>
-          <Text>tell me to activate
-delay 1.0</Text>
+          <Text>tell me to activate</Text>
         </Step>
         <Step enable="True" id="89" name="# (comment)"/>
         <Step enable="True" id="88" name="Open Script Workspace"/>
@@ -1522,7 +1508,7 @@ delay 1.0</Text>
         </Step>
         <Step enable="True" id="68" name="If">
           <Restore state="False"/>
-          <Calculation><![CDATA[Left ( $openResult ; 5 ) = "ERROR"]]></Calculation>
+          <Calculation><![CDATA[Left ( $openResult ; 5 ) ≠ "OK"]]></Calculation>
         </Step>
         <Step enable="True" id="103" name="Exit Script">
           <Calculation><![CDATA[JSONSetElement ( "{}" ;
@@ -1531,94 +1517,11 @@ delay 1.0</Text>
 )]]></Calculation>
         </Step>
         <Step enable="True" id="70" name="End If"/>
-        <Step enable="True" id="89" name="# (comment)">
-          <Text>Click the step editor (SEFabricView) to ensure keyboard focus is there, not the script list</Text>
-        </Step>
-        <Step enable="True" id="67" name="Perform AppleScript">
-          <ContentType value="Calculation"/>
-          <Calculation><![CDATA["tell application \"System Events\"" & ¶ &
-"	tell process \"FileMaker Pro\"" & ¶ &
-"		set wsWindows to windows whose title contains \"Script Workspace\"" & ¶ &
-"		if (count of wsWindows) > 0 then" & ¶ &
-"			tell item 1 of wsWindows" & ¶ &
-"				tell splitter group 1" & ¶ &
-"					click button \"" & $target & "\"" & ¶ &
-"					delay 0.3" & ¶ &
-"					repeat with sa in scroll areas" & ¶ &
-"						try" & ¶ &
-"							click table 1 of sa" & ¶ &
-"							exit repeat" & ¶ &
-"						end try" & ¶ &
-"					end repeat" & ¶ &
-"				end tell" & ¶ &
-"			end tell" & ¶ &
-"		end if" & ¶ &
-"	end tell" & ¶ &
-"end tell"]]></Calculation>
-        </Step>
-        <Step enable="True" id="89" name="# (comment)">
-          <Text>Busy-wait 0.5s to allow Script Workspace to finish rendering before paste</Text>
-        </Step>
-        <Step enable="True" id="141" name="Set Variable">
-          <Value>
-            <Calculation><![CDATA[Get ( CurrentHostTimestamp ) + .5 / 86400]]></Calculation>
-          </Value>
-          <Name>$waitUntil</Name>
-        </Step>
-        <Step enable="True" id="71" name="Loop">
-          <Restore state="False"/>
-          <FlushType value="Always"/>
-        </Step>
-        <Step enable="True" id="72" name="Exit Loop If">
-          <Calculation><![CDATA[Get ( CurrentHostTimestamp ) ≥ $waitUntil]]></Calculation>
-        </Step>
-        <Step enable="True" id="73" name="End Loop"/>
-        <Step enable="True" id="89" name="# (comment)"/>
-        <Step enable="True" id="68" name="If">
-          <Restore state="False"/>
-          <Calculation><![CDATA[$selectAll]]></Calculation>
-        </Step>
-        <Step enable="True" id="67" name="Perform AppleScript">
-          <ContentType value="Text"/>
-          <Text>tell application "System Events"
-	tell process "FileMaker Pro"
-		keystroke "a" using {command down}
-		delay 0.2
-		key code 51
-	end tell
-end tell</Text>
-        </Step>
-        <Step enable="True" id="70" name="End If"/>
-        <Step enable="True" id="67" name="Perform AppleScript">
-          <ContentType value="Text"/>
-          <Text>delay 0.5
-tell application "System Events"
-	tell process "FileMaker Pro"
-		keystroke "v" using {command down}
-	end tell
-end tell</Text>
-        </Step>
-        <Step enable="True" id="89" name="# (comment)"/>
-        <Step enable="True" id="68" name="If">
-          <Restore state="False"/>
-          <Calculation><![CDATA[$autoSave]]></Calculation>
-        </Step>
-        <Step enable="True" id="67" name="Perform AppleScript">
-          <ContentType value="Text"/>
-          <Text>tell application "System Events"
-	tell process "FileMaker Pro"
-		keystroke "s" using {command down}
-	end tell
-end tell</Text>
-        </Step>
-        <Step enable="True" id="70" name="End If"/>
         <Step enable="True" id="89" name="# (comment)"/>
         <Step enable="True" id="103" name="Exit Script">
           <Calculation><![CDATA[JSONSetElement ( "{}" ;
 	[ "success" ; True ; JSONBoolean ] ;
-	[ "script" ; $target ; JSONString ] ;
-	[ "auto_save" ; $autoSave ; JSONBoolean ] ;
-	[ "select_all" ; $selectAll ; JSONBoolean ]
+	[ "script" ; $target ; JSONString ]
 )]]></Calculation>
         </Step>
       </Script>
