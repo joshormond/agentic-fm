@@ -2,7 +2,7 @@
 """
 companion_server.py - Lightweight HTTP companion server for agentic-fm.
 
-Replaces the MBS FileMaker Plugin for shell command execution. FileMaker
+Lightweight HTTP companion server for shell command execution. FileMaker
 calls this server via the native Insert from URL step (curl-compatible).
 
 Usage:

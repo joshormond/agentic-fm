@@ -21,7 +21,7 @@ agentic-fm gives an AI agent structured knowledge of your FileMaker solution —
 1. **FileMaker Pro 21.0+** — earlier versions lack required steps (`GetTableDDL`, `While`, data file steps)
 2. **fm-xml-export-exploder** — Rust binary that parses FileMaker XML exports. Download from [GitHub releases](https://github.com/bc-m/fm-xml-export-exploder/releases/latest)
 3. **Python 3** — macOS ships Python 3 at `/usr/bin/python3`. For a newer version: `brew install python`
-4. **Node.js 18+** — required for the webviewer. Install from [nodejs.org](https://nodejs.org) or via `brew install node`
+4. **Node.js 18+** — required only for the webviewer path, not for CLI/IDE-only usage. Install from [nodejs.org](https://nodejs.org) or via `brew install node`
 5. **Your AI agent of choice** — Claude Code, Cursor, VS Code + Copilot, etc. (CLI/IDE path only)
 
 > **Python virtual environment**: Only needed if you plan to run `agent/docs/filemaker/fetch_docs.py` to fetch Claris reference documentation. That script auto-installs `requests` and `beautifulsoup4` on first run via pip. The core scripts (`clipboard.py`, `validate_snippet.py`, `companion_server.py`) use the Python standard library only — no venv required.

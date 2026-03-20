@@ -40,7 +40,6 @@ To enable GitHub Pages:
 
 ```
 website/
-├── .github/workflows/deploy.yml   # GitHub Actions deployment
 ├── public/
 │   └── favicon.svg                 # Site favicon
 ├── src/
@@ -50,7 +49,8 @@ website/
 │   │   ├── Hero.astro              # Landing page hero section
 │   │   ├── FeatureGrid.astro       # Feature cards grid
 │   │   ├── CTA.astro               # Call-to-action section
-│   │   └── PageHeader.astro        # Shared inner page header
+│   │   ├── PageHeader.astro        # Shared inner page header
+│   │   └── WebviewDemo.astro       # Webviewer demo component
 │   ├── layouts/
 │   │   └── Base.astro              # Root layout (SEO, fonts, dark mode)
 │   ├── pages/
@@ -58,7 +58,9 @@ website/
 │   │   ├── docs.astro              # Documentation
 │   │   ├── philosophy.astro        # AI interaction philosophy
 │   │   ├── installation.astro      # Setup guide
-│   │   └── contributing.astro      # Contribution guide
+│   │   ├── contributing.astro      # Contribution guide
+│   │   ├── themes.astro            # Themes page
+│   │   └── webviewer.astro         # Webviewer page
 │   └── styles/
 │       └── global.css              # Tailwind + custom theme
 ├── astro.config.mjs

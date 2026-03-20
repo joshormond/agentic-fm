@@ -150,7 +150,7 @@ Present instructions in the standard format:
 
 Repeat for each script. Present all paste instructions up front so the developer can work through them in sequence without waiting.
 
-**Tier 2**: `deploy.py` auto-pastes into each placeholder via MBS. Confirm success for each before moving to the next.
+**Tier 2**: `deploy.py` auto-pastes into each placeholder. Confirm success for each before moving to the next.
 
 **Tier 3**: `deploy.py` handles everything. Report result per script.
 

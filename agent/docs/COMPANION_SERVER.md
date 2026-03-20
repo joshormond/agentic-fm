@@ -2,9 +2,9 @@
 
 The companion server is a lightweight HTTP server that exposes `fmparse.sh` as a local API endpoint. FileMaker calls it via the native **Insert from URL** script step, which functions as a curl-compatible HTTP client.
 
-**Why this exists:** FileMaker has no built-in mechanism to execute arbitrary shell commands. The traditional workaround is the MBS FileMaker Plugin, which provides a `MBS("Shell.Execute"; ...)` function. The companion server replaces this dependency entirely — no third-party plugin is required. As long as the server is running on the developer's machine, FileMaker can trigger XML parsing and context generation through a simple HTTP POST.
+**Why this exists:** FileMaker has no built-in mechanism to execute arbitrary shell commands. The companion server fills this gap — no third-party plugin is required. As long as the server is running on the developer's machine, FileMaker can trigger XML parsing and context generation through a simple HTTP POST.
 
-**Windows gap:** The companion server approach is macOS-only at this time. `fmparse.sh` and `fm-xml-export-exploder` are Unix binaries. On Windows, the MBS plugin remains the supported fallback for shell execution.
+**Windows gap:** The companion server approach is macOS-only at this time. `fmparse.sh` and `fm-xml-export-exploder` are Unix binaries.
 
 ---
 
@@ -263,7 +263,7 @@ Accepts fmxmlsnippet XML content and writes it to the macOS clipboard using `cli
 
 ### POST /trigger
 
-Triggers FM Pro on the host to run a named FileMaker script via AppleScript (`osascript`). Used by `deploy.py` for Tier 2/3 automated paste via MBS.
+Triggers FM Pro on the host to run a named FileMaker script via AppleScript (`osascript`). Used by `deploy.py` for Tier 2/3 automated deployment.
 
 **Request body:**
 ```json
@@ -364,7 +364,7 @@ kill <PID>
 Or start the server on a different port and update the URL in the FileMaker companion script:
 
 ```bash
-python agent/scripts/companion_server.py --port 9000
+python3 agent/scripts/companion_server.py --port 9000
 ```
 
 ### Server not running — FileMaker shows a connection dialog

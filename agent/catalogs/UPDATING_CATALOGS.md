@@ -102,7 +102,7 @@ Only include sub-keys that have actual content. Do not add empty arrays or empty
    - Subtle or surprising behaviors → `gotchas`
    - General behavioral detail → `behavioral`
 4. Add the `notes` object after `helpUrl` in the catalog entry.
-5. Validate JSON: `python -m json.tool agent/catalogs/step-catalog-en.json > /dev/null`
+5. Validate JSON: `python3 -m json.tool agent/catalogs/step-catalog-en.json > /dev/null`
 
 ### Archive rule
 
@@ -110,4 +110,4 @@ Once notes are migrated, the snippet file becomes the **archive** (XML reference
 
 ## Additional Reference
 
-Official Claris documentation for each script step may be available at `agent/docs/filemaker/script-steps/`. Note: if working in a git worktree, these files are in the main repo — navigate up from the worktree path to find them (e.g., `../../agent/docs/filemaker/script-steps/`). These can be consulted for parameter details, behavior notes, and platform support. **Important:** the official docs only reference terms in the human-readable format — they contain no fmxmlsnippet/XML values. They are useful for understanding HR option names and step behavior, not for XML element or attribute names.
+Official Claris documentation for each script step may be available at `agent/docs/filemaker/script-steps/`. **Note:** this directory only exists if `agent/docs/filemaker/fetch_docs.py` has been run to download the documentation -- it is not checked into the repo. These can be consulted for parameter details, behavior notes, and platform support. **Important:** the official docs only reference terms in the human-readable format — they contain no fmxmlsnippet/XML values. They are useful for understanding HR option names and step behavior, not for XML element or attribute names.

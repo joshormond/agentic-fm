@@ -253,5 +253,5 @@ The menu system in this project uses a single bridge script to route all menu ac
 - **`window.triggerEditorAction`** — exposed globally in `EditorPanel.tsx`, calls `editor.trigger('fm', actionId, null)` on the Monaco instance
 - Each menu item calls script 271 with a Monaco action ID as its parameter (e.g. `"actions.find"`, `"editor.action.commentLine"`)
 
-See `webviewer/src/editor/EditorPanel.tsx` for the global exposure and `agent/sandbox/Edit-menu.xml` for a complete working example.
+See `webviewer/src/editor/EditorPanel.tsx` for the global exposure and `filemaker/custom_menu/custom_menus.xml` for a complete working example.
 

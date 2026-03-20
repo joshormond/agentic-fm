@@ -2,11 +2,11 @@
 
 This folder contains the files needed to add an editor-aware custom menu set to a FileMaker layout hosting the agentic-fm web viewer. This integration is **optional** — it adds five menus (File, Edit, Selection, Format, View) populated with editor keyboard shortcuts and actions that are routed through a bridge script to the Monaco editor.
 
-| File | Type | Description |
-|---|---|---|
-| `Agentic-fm Menu-script.xml` | fmxmlsnippet | Bridge script that receives a menu action string as `Get(ScriptParameter)` and forwards it to the web viewer |
-| `custom_menus.xml` | FMObjectTransfer (ut16) | All 5 custom menus with their items |
-| `custom_menu_set.xml` | FMObjectTransfer (ut16) | The `agentic-fm` menu set referencing the 5 menus |
+| File                         | Type                    | Description                                                                                                  |
+| ---------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `Agentic-fm Menu-script.xml` | fmxmlsnippet            | Bridge script that receives a menu action string as `Get(ScriptParameter)` and forwards it to the web viewer |
+| `custom_menus.xml`           | FMObjectTransfer (ut16) | All 5 custom menus with their items                                                                          |
+| `custom_menu_set.xml`        | FMObjectTransfer (ut16) | The `agentic-fm` menu set referencing the 5 menus                                                            |
 
 ---
 
@@ -35,8 +35,7 @@ Because FileMaker custom menus use solution-specific UUIDs and script IDs, the X
 Load the script onto the clipboard and paste it into your Script Workspace:
 
 ```bash
-source .venv/bin/activate
-python agent/scripts/clipboard.py write filemaker/custom_menu/Agentic-fm Menu-script.xml
+python3 agent/scripts/clipboard.py write filemaker/custom_menu/Agentic-fm Menu-script.xml
 ```
 
 Switch to FileMaker, open **Scripts > Script Workspace**, click in the script list, and press **⌘V**. The **Agentic-fm Menu** script will appear.
@@ -78,14 +77,13 @@ With the placeholder menus and menu set still selected in FileMaker:
 1. In **Manage > Custom Menus**, select **all five menus**, copy them (⌘C), then run:
 
 ```bash
-source .venv/bin/activate
-python agent/scripts/clipboard.py read agent/sandbox/custom_menus.xml
+python3 agent/scripts/clipboard.py read agent/sandbox/custom_menus.xml
 ```
 
 2. Select the **agentic-fm** menu set, copy it (⌘C), then run:
 
 ```bash
-python agent/scripts/clipboard.py read agent/sandbox/custom_menu_set.xml
+python3 agent/scripts/clipboard.py read agent/sandbox/custom_menu_set.xml
 ```
 
 These snapshot files capture the solution-specific catalog UUIDs that FileMaker requires for paste operations.
@@ -97,8 +95,7 @@ Run the **Explode XML** script (or `fmparse.sh` from the terminal) to export the
 ### 6. Run the install script
 
 ```bash
-source .venv/bin/activate
-python agent/scripts/install_menus.py
+python3 agent/scripts/install_menus.py
 ```
 
 The script auto-reads UUIDs from `xml_parsed/`, looks up the script ID from `context/{solution}/scripts.index`, builds the populated XML, writes it to `agent/sandbox/custom_menus.xml`, and loads it onto the clipboard.
@@ -110,7 +107,7 @@ In FileMaker, open **File > Manage > Custom Menus**. Select the first menu in th
 ### 8. Load and paste the menu set
 
 ```bash
-python agent/scripts/install_menus.py --set
+python3 agent/scripts/install_menus.py --set
 ```
 
 In FileMaker, select the **agentic-fm** menu set and press **⌘V**.

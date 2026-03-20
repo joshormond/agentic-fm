@@ -1,5 +1,7 @@
 # Roadmap
 
+Last updated: 2026-03-20
+
 agentic-fm started as a precision tool for one thing: generating FileMaker scripts with an accuracy that general-purpose AI cannot match. That foundation is solid. The project now expands to cover the full surface of FileMaker development — every object type, every workflow, every stage of a solution's life.
 
 ---
@@ -15,6 +17,8 @@ The core script workflow is production-ready:
 - **Custom functions** — generate and paste custom functions directly into Manage Custom Functions
 - **Custom menus** — locate, create, and modify custom menus and menu sets with correct UUIDs
 - **Library** — a developer managed and curated collection of proven, reusable script patterns (error handling, API requests, transaction wrappers, timeout loops, and more) that the agent draws on rather than generating from scratch
+- **Multi-script scaffold** — guide the Untitled placeholder technique for complex multi-script systems: calculate how many placeholders are needed, capture their real IDs, generate all scripts in one pass with correct inter-script wiring, then walk through the renames
+- **Deployment module** — tiered deployment via `deploy.py`: Tier 1 (manual clipboard paste), Tier 2 (AGFMPaste via OData), Tier 3 (future full automation)
 
 ---
 
@@ -24,7 +28,6 @@ The core script workflow is production-ready:
 
 - **Script refactor** — analyse an existing script and produce an improved version with better error handling, cleaner variable naming, and consolidated logic — while preserving observable behaviour
 - **Script modernizer** — identify older development patterns and suggest modernised replacements, with risk assessment for each change. Examples: replacing multi-step `Commit Record` loops with `Open Transaction / Commit Transaction`; replacing global-field-plus-GTRR navigation with the newer `Go to List of Records` approach
-- **Multi-script scaffold** — guide the Untitled placeholder technique for complex multi-script systems: calculate how many placeholders are needed, capture their real IDs, generate all scripts in one pass with correct inter-script wiring, then walk through the renames
 - **Script test** — generate a companion verification script that exercises a target script and reports pass/fail back to the agent via the debug server
 - **Implementation plan** — structured planning before generation: decompose requirements, identify dependencies, and confirm the approach before writing a line of code
 

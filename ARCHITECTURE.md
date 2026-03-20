@@ -52,6 +52,7 @@ The AI combines these inputs to produce fmxmlsnippet output in `agent/sandbox/`,
 | Webviewer            | `webviewer/`                          | Manual (checked in)            | Browser-based visual script editor with live HR-to-XML conversion and AI chat |
 | Generated scripts    | `agent/sandbox/`                      | AI agent                       | fmxmlsnippet output ready for clipboard import                |
 | Validation script    | `agent/scripts/validate_snippet.py`   | Manual (checked in)            | Post-generation validation of fmxmlsnippet output; checks staleness and coding conventions |
+| Deploy script        | `agent/scripts/deploy.py`             | Manual (checked in)            | Tiered deployment: Tier 1 (manual clipboard paste), Tier 2 (AGFMPaste via OData), Tier 3 (future full automation) |
 
 ## Context Hierarchy
 
@@ -122,6 +123,7 @@ Each catalog entry provides:
 | `hrSignature`    | Human-readable parameter format for HR output                                     |
 | `monacoSnippet`  | VS Code / Monaco snippet for autocomplete                                         |
 | `blockPair`      | Matching step partners and role (`open`/`middle`/`close`)                         |
+| `notes`          | Behavioral context with sub-keys: `constraints`, `platform`, `gotchas`, `performance`, `behavioral` |
 | `snippetFile`    | Path to the corresponding snippet_examples file (fallback reference)              |
 | `status`         | `"complete"` = fully reviewed, `"auto"` = unreviewed, `"unfinished"` = partial    |
 
@@ -193,7 +195,7 @@ Generates AI-optimised index files from the exploded XML.
 Validates fmxmlsnippet output in `agent/sandbox/` for common errors before pasting into FileMaker.
 
 ```
-python agent/scripts/validate_snippet.py [file_or_directory] [options]
+python3 agent/scripts/validate_snippet.py [file_or_directory] [options]
 ```
 
 - Defaults to validating all files in `agent/sandbox/`.
@@ -204,10 +206,10 @@ python agent/scripts/validate_snippet.py [file_or_directory] [options]
 
 ### companion_server.py
 
-A lightweight HTTP server that FileMaker calls via `Insert from URL` to run shell commands — replacing the MBS FileMaker Plugin for shell execution.
+A lightweight HTTP server that FileMaker calls via `Insert from URL` to run shell commands.
 
 ```
-python agent/scripts/companion_server.py
+python3 agent/scripts/companion_server.py
 ```
 
 - Listens on port 8765 by default.
@@ -258,6 +260,5 @@ When extending this project, keep the following principles in mind:
 | [fm-xml-export-exploder](https://github.com/bc-m/fm-xml-export-exploder) | `fmparse.sh`                                  | Must be on PATH or set via `FM_XML_EXPLODER_BIN`                                 |
 | `xmllint`                                                                | `fmcontext.sh`                                | Ships with macOS; `libxml2-utils` on Linux                                       |
 | FileMaker Pro 21.0+                                                      | `Context()` function                          | For `GetTableDDL` and `While` support                                            |
-| Python 3 (stdlib)                                                        | `clipboard.py`, `validate_snippet.py`, `companion_server.py` | No virtualenv required; run directly with `python agent/scripts/...` |
+| Python 3 (stdlib)                                                        | `clipboard.py`, `validate_snippet.py`, `companion_server.py`, `deploy.py` | No virtualenv required; run directly with `python3 agent/scripts/...` |
 | Node.js 18+                                                              | `webviewer/`                                  | For Vite dev server and build                                                    |
-| MBS FileMaker Plugin _(legacy)_                                          | Older Explode XML installs only               | Replaced by `companion_server.py`; no longer required for new setups             |

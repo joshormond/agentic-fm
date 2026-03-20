@@ -47,22 +47,16 @@ When accessing the clipboard via the macOS Pasteboard API directly (e.g. via PyO
 
 A Python helper script is provided at `agent/scripts/clipboard.py`. It handles both read and write directions and auto-detects the correct class code from the XML content.
 
-Activate the virtual environment first:
-
-```bash
-source .venv/bin/activate
-```
-
 ### Read: FM objects on clipboard → XML file
 
 After copying objects in FileMaker (`⌘C`), run:
 
 ```bash
 # Print to stdout
-python agent/scripts/clipboard.py read
+python3 agent/scripts/clipboard.py read
 
 # Save directly to the sandbox
-python agent/scripts/clipboard.py read agent/sandbox/myscript.xml
+python3 agent/scripts/clipboard.py read agent/sandbox/myscript.xml
 ```
 
 ### Write: XML file → FM objects on clipboard
@@ -71,10 +65,10 @@ After generating or editing a snippet, send it to the clipboard so it can be pas
 
 ```bash
 # Class is auto-detected from the XML content
-python agent/scripts/clipboard.py write agent/sandbox/myscript.xml
+python3 agent/scripts/clipboard.py write agent/sandbox/myscript.xml
 
 # Override the class explicitly if needed
-python agent/scripts/clipboard.py write agent/sandbox/myscript.xml --class XMSC
+python3 agent/scripts/clipboard.py write agent/sandbox/myscript.xml --class XMSC
 ```
 
 Auto-detection reads the first XML element inside the fmxmlsnippet wrapper and maps it to the correct class (e.g. `<Step>` → `XMSS`, `<CustomFunction>` → `XMFN`).
