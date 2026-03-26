@@ -459,9 +459,33 @@ import CTA from '../components/CTA.astro';
     <!-- Analysis & Reference -->
     <div id="analysis-reference">
       <h2 class="text-2xl font-bold text-zinc-900 dark:text-white">Analysis & Reference</h2>
-      <p class="mt-2 text-zinc-600 dark:text-zinc-400">Trace object usage across your solution and look up reusable library code.</p>
+      <p class="mt-2 text-zinc-600 dark:text-zinc-400">Analyze entire solutions, trace object usage, and look up reusable library code.</p>
 
       <div class="mt-8 space-y-6">
+        <div class="skill-card">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="text-lg font-semibold text-zinc-900 dark:text-white">solution-analysis</h3>
+          </div>
+          <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+            Produces a comprehensive profile of an entire FileMaker solution &mdash; data model, business logic,
+            UI coverage, integrations, and health metrics. All heavy processing happens on disk via Python;
+            the agent only reads the compact output. Generates a self-contained HTML report with interactive
+            visualizations including force-directed relationship graphs, script call trees, sunburst charts,
+            performance hotspot analysis (unstored/summary fields), and sortable data tables.
+            Supports optional extensions (networkx, pandas, matplotlib) for deeper graph topology analysis
+            and community detection.
+          </p>
+          <div class="mt-4">
+            <h4 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Example prompts</h4>
+            <div class="mt-2 flex flex-wrap gap-2">
+              <code class="trigger-tag">"analyze this solution"</code>
+              <code class="trigger-tag">"give me a solution overview"</code>
+              <code class="trigger-tag">"what does this solution do?"</code>
+              <code class="trigger-tag">"generate a solution profile"</code>
+            </div>
+          </div>
+        </div>
+
         <div class="skill-card">
           <div class="flex items-start justify-between gap-4">
             <h3 class="text-lg font-semibold text-zinc-900 dark:text-white">trace</h3>

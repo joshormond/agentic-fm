@@ -142,6 +142,8 @@ When creating scripts, the AI has access to multiple sources of context about th
 - **Via OData** (when configured): agent calls FM scripts through `AGFMScriptBridge` — see **OData script execution** below
 
 > **Docker networking note**: When FM Server runs in a Docker container and the companion server runs on the host, OData-triggered scripts execute server-side inside the container. In that case `localhost:8765` in the FM scripts will not reach the companion server — use `host.docker.internal:8765` instead.
+>
+> This also applies to the agent itself when running inside a container (e.g. a Claude Code worktree). Any direct HTTP call the agent makes to the companion server (webviewer status, `/trigger`, `/debug`, `/explode`, etc.) will fail on `localhost:8765`. Use the fallback sequence: try `http://localhost:8765` first; if the connection is refused (curl exit code 7), retry with `http://host.docker.internal:8765` and use that host for all subsequent calls in the session.
 
 The available scripts and what they do:
 
