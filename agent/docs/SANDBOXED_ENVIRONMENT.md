@@ -156,11 +156,30 @@ python3 agent/scripts/companion_server.py &
 
 **Port:** 8765 (default). Override with `--port N`.
 
-**Binding:** By default binds to `127.0.0.1`. If the sandbox needs to be reachable from a different network namespace (e.g. Docker), set:
+**Binding:** By default binds to `127.0.0.1`. If the sandbox needs to be reachable from a different network namespace (e.g. Docker), you can bind to all interfaces — but **only after verifying the host is on a private network and getting explicit user confirmation**.
 
-```bash
-COMPANION_BIND_HOST=0.0.0.0 python3 agent/scripts/companion_server.py &
-```
+> **⚠ Security warning — binding to 0.0.0.0**
+>
+> Binding to `0.0.0.0` exposes the companion server on **all network interfaces**, including any public-facing ones. An agent must **never** do this automatically. Before using `COMPANION_BIND_HOST=0.0.0.0`:
+>
+> 1. **Probe the current IP** and verify it falls within an RFC 1918 / RFC 4193 private range:
+>    - `10.0.0.0/8`
+>    - `172.16.0.0/12`
+>    - `192.168.0.0/16`
+>    ```bash
+>    # Check all non-loopback IPv4 addresses
+>    ip -4 addr show scope global 2>/dev/null | grep -oP 'inet \K[\d.]+' || \
+>      ifconfig 2>/dev/null | grep -oP 'inet (\d+\.){3}\d+' | grep -oP '[\d.]+'
+>    ```
+>    If **any** interface has a public (non-private-range) IP, **do not bind to 0.0.0.0**.
+>
+> 2. **Ask the user for explicit confirmation**, e.g.:
+>    > "The companion server needs to listen on all interfaces (`0.0.0.0`) so the container/VM can reach it. Your network interfaces are on private IPs (e.g. `192.168.1.x`). This is safe on a local network but **should not be used on public or untrusted networks**. Proceed?"
+>
+> 3. Only after both checks pass, start with:
+>    ```bash
+>    COMPANION_BIND_HOST=0.0.0.0 python3 agent/scripts/companion_server.py &
+>    ```
 
 **Verify it is running:**
 
@@ -282,7 +301,7 @@ The companion server (`agent/scripts/companion_server.py`) is the HTTP bridge be
 | **Full-access sandbox** | Started by agent on host | `localhost:8765` | `localhost:8765` |
 | **Restricted sandbox** | Developer starts on host | `localhost:8765` | Not reachable (use filesystem) |
 
-**Key environment variable:** `COMPANION_BIND_HOST` controls the bind address. Default is `127.0.0.1`. Set to `0.0.0.0` when the companion needs to accept connections from containers or VMs.
+**Key environment variable:** `COMPANION_BIND_HOST` controls the bind address. Default is `127.0.0.1`. Can be set to `0.0.0.0` when the companion needs to accept connections from containers or VMs — but **only on private networks (RFC 1918) and only with explicit user confirmation**. See the security warning in §2c above.
 
 **Key config file:** `agent/config/automation.json` — the `companion_url` field can be set to `http://host.docker.internal:8765` for Docker scenarios.
 
@@ -357,7 +376,7 @@ For Tier 1 deployment (all platforms), present paste instructions:
 
 If your sandbox environment supports exposing ports (e.g. Docker with `-p`, or a desktop app with port forwarding settings), and the developer wants the FileMaker plugin to communicate directly with services you run:
 
-1. **Companion server**: Start with `COMPANION_BIND_HOST=0.0.0.0` so it listens on all interfaces
+1. **Companion server**: Bind to all interfaces with `COMPANION_BIND_HOST=0.0.0.0` — **only after verifying all host IPs are in RFC 1918 private ranges and getting explicit user confirmation** (see §2c security warning)
 2. **Expose port 8765** through whatever mechanism the sandbox provides
 3. **Update FileMaker scripts**: The developer may need to change companion URLs in their FM scripts from `localhost:8765` to the exposed address (or configure `automation.json`)
 4. **Webviewer dev server**: If using the webviewer, expose port 8080 similarly
